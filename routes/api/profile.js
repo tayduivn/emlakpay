@@ -127,7 +127,7 @@ router.delete("/", auth, async (req, res) => {
     await Profile.findOneAndDelete({ user: req.user.id });
     await User.findOneAndDelete({ _id: req.user.id });
     res.json({
-      msg: "Kullanıcı ve kullanıcıya ait bütün mülkler başarıyla silindi."
+      msg: "Kullanıcı ve kullanıcıya ait bütün ilanlar başarıyla silindi."
     });
   } catch (err) {
     console.error(err.message);

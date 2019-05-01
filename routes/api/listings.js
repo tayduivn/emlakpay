@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/", (req, res) => res.send("Property route"));
+router.get("/", (req, res) => res.send("Listing route"));
 
 module.exports = router;
