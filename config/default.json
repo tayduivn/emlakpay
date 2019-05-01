@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://admin357:Z5sVAl1gBFD57ozA@cluster0-d3xg5.mongodb.net/emlakpay?retryWrites=true",
+  "jwtSecret": "secrettoken"
+}
