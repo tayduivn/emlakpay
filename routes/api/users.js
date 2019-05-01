@@ -10,9 +10,6 @@ const config = require("config");
 router.post(
   "/",
   [
-    check("name", "İsim boş bırakılamaz.")
-      .not()
-      .isEmpty(),
     check("email", "Lütfen geçerli bir e-posta adresi giriniz.").isEmail(),
     check(
       "password",
@@ -24,19 +21,21 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const { name, email, password } = req.body;
+    const { email, password } = req.body;
 
     try {
       let user = await User.findOne({ email });
       if (user) {
         return res.status(400).json({
           errors: [
-            { msg: "Bu e-posta adresi kullanılıyor. Lütfen giriş yapın." }
+            {
+              msg:
+                "Bu e-posta adresi kullanılıyor. Eğer üyeyseniz lütfen giriş yapın."
+            }
           ]
         });
       }
       user = new User({
-        name,
         email,
         password
       });

@@ -7,18 +7,17 @@ const { check, validationResult } = require("express-validator/check");
 
 router.get("/me", auth, async (req, res) => {
   try {
-    const profile = await Profile.findOne({ user: req.user.id }).populate(
-      "User",
-      ["name"]
-    );
+    const profile = await Profile.findOne({ user: req.user.id });
     if (!profile) {
-      return res
-        .status(400)
-        .json({ msg: "Bu kullanıcıya ait bir profil bulunamadı." });
+      return res.status(400).json({
+        msg:
+          "Bu kullanıcıya ait bir profil bulunamadı. Lütfen bir profil oluşturun."
+      });
     }
     res.json(profile);
   } catch (err) {
     console.log(err.message);
+
     res.status(500).send("Server Error");
   }
 });
@@ -28,10 +27,13 @@ router.post(
   [
     auth,
     [
-      check(
-        "phoneNo",
-        "Profil oluşturmanız için bir iletişim numarası girmeniz gerekmektedir"
-      )
+      check("name", "İsim alanı zorunludur.")
+        .not()
+        .isEmpty(),
+      check("surname", "Soy isim alanı zorunludur.")
+        .not()
+        .isEmpty(),
+      check("phoneNo", "İletişim numarası alanı zorunludur.")
         .not()
         .isEmpty()
     ]
@@ -43,6 +45,8 @@ router.post(
     }
 
     const {
+      name,
+      surname,
       company,
       bio,
       phoneNo,
@@ -55,6 +59,8 @@ router.post(
 
     const profileFields = {};
     profileFields.user = req.user.id;
+    if (name) profileFields.name = name;
+    if (surname) profileFields.surname = surname;
     if (company) profileFields.company = company;
     if (bio) profileFields.bio = bio;
     if (phoneNo) profileFields.phoneNo = phoneNo;
@@ -65,7 +71,7 @@ router.post(
     if (linkedin) profileFields.social.linkedin = linkedin;
     if (twitter) profileFields.social.twitter = twitter;
     if (facebook) profileFields.social.facebook = facebook;
-    console.log(req.user.id);
+
     try {
       let profile = await Profile.findOne({ user: req.user.id });
       if (profile) {
@@ -76,7 +82,6 @@ router.post(
         );
         return res.json(profile);
       }
-      console.log(req.user.id);
       profile = new Profile(profileFields);
       await profile.save();
       res.json(profile);
@@ -86,5 +91,48 @@ router.post(
     }
   }
 );
+//get all profiles
+router.get("/", auth, async (req, res) => {
+  try {
+    const profiles = await Profile.find();
+    res.json(profiles);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+//get profile by user id
+router.get("/detail/:user_id", auth, async (req, res) => {
+  try {
+    const profile = await Profile.findOne({
+      user: req.params.user_id
+    });
+    if (!profile) {
+      return res.status(400).json({ msg: "Profil bulunamadı." });
+    }
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind == "ObjectId") {
+      return res.status(400).json({ msg: "Profil bulunamadı." });
+    }
+    res.status(500).send("Server Error");
+  }
+});
+
+//Delete the user, profile and related properties
+router.delete("/", auth, async (req, res) => {
+  try {
+    await Profile.findOneAndDelete({ user: req.user.id });
+    await User.findOneAndDelete({ _id: req.user.id });
+    res.json({
+      msg: "Kullanıcı ve kullanıcıya ait bütün mülkler başarıyla silindi."
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 module.exports = router;

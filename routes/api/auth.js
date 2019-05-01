@@ -37,7 +37,7 @@ router.post(
           errors: [
             {
               msg:
-                "Geçersiz kullanıcı adı veya şifre. Lütfen bilgilerinizi kontrol ediniz, üye değilseniz üye olunuz."
+                "Geçersiz e-posta veya şifre. Lütfen bilgilerinizi kontrol ediniz, üye değilseniz üye olunuz."
             }
           ]
         });
@@ -49,7 +49,7 @@ router.post(
           errors: [
             {
               msg:
-                "Geçersiz kullanıcı adı veya şifre. Lütfen bilgilerinizi kontrol ediniz, üye değilseniz üye olunuz."
+                "Geçersiz e-posta veya şifre. Lütfen bilgilerinizi kontrol ediniz, üye değilseniz üye olunuz."
             }
           ]
         });
