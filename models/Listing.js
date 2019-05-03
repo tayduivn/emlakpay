@@ -6,7 +6,7 @@ const ListingSchema = new mongoose.Schema({
     ref: "User"
   },
   title: { type: String, required: true },
-  brief: { type: String, required: true },
+  brief: { type: String},
   location: {
     province: { type: String, required: true },
     district: { type: String, required: true },
@@ -27,10 +27,12 @@ const ListingSchema = new mongoose.Schema({
   heating: { type: String, required: true }, //Yok "Soba" "Doğalgaz Sobası" "Kat Kaloriferi" "Merkezi" "Merkezi (Pay Ölçer)" "Doğalgaz (Kombi)" "Yerden Isıtma" Klima" Fancoil Ünitesi" "Güneş Enerjisi" Jeotermal Şömine VRV "Isı Pompası"
   balcony: { type: Boolean, required: true },
   furnished: { type: Boolean, required: true },
+  inSite: { type: Boolean, required: true },
   usageStatus: { type: String, required: true }, //Boş Kiracılı Mülk Sahibi
   dues: { type: Number, required: true },
   swap: { type: Boolean, required: true },
-  side: { type: String } //Batı Doğu Güney Kuzey
+  side: { type: String }, //Batı Doğu Güney Kuzey
+  favedBy: [{type: mongoose.Schema.Types.ObjectId, ref:'User'}]
 });
 
 module.exports = Listing = mongoose.model("Listing", ListingSchema);

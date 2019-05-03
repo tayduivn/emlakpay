@@ -1,6 +1,73 @@
 const express = require("express");
 const router = express.Router();
+const auth = require('../../middleware/auth');
+const {check, validationResult} = require('express-validator/check');
+const Listing = require('../../models/Listing');
+const Profile = require('../../models/Profile');
+const User = require('../../models/User');
 
-router.get("/", (req, res) => res.send("Listing route"));
+router.post("/",[auth, [
+  check('title', 'Başlık boş bırakılamaz').not().isEmpty(),
+  check('province', 'Şehir boş bırakılamaz').not().isEmpty(),
+  check('district', 'İlçe boş bırakılamaz').not().isEmpty(),
+  check('neighborhood', 'Mahalle boş bırakılamaz').not().isEmpty(),
+  check('price', 'Fiyat boş bırakılamaz').not().isEmpty(),
+  check('propertyType', 'Emlak tipi boş bırakılamaz').not().isEmpty(),
+  check('propertyStatus', 'İlan tipi boş bırakılamaz').not().isEmpty(),
+  check('grossm2', 'Bürüt m2 boş bırakılamaz').not().isEmpty(),
+  check('netm2', 'Net m2 bırakılamaz').not().isEmpty(),
+  check('roomCount', 'Oda sayısı boş bırakılamaz').not().isEmpty(),
+  check('loungeCount', 'Salon sayısı boş bırakılamaz').not().isEmpty(),
+  check('bathroomCount', 'Banyo sayısı boş bırakılamaz').not().isEmpty(),
+  check('age', 'Emlak yaşı boş bırakılamaz').not().isEmpty(),
+  check('floor', 'Bulunduğu kat boş bırakılamaz').not().isEmpty(),
+  check('totalFloor', 'Toplam kat sayısı boş bırakılamaz').not().isEmpty(),
+  check('heating', 'Isınma bilgisi boş bırakılamaz').not().isEmpty(),
+  check('balcony', 'Balkon bilgisi bırakılamaz').not().isEmpty(),
+  check('furnished', 'Mobilya bilgisi boş bırakılamaz').not().isEmpty(),
+  check('inSite', 'Site bilgisi boş bırakılamaz').not().isEmpty(),
+  check('usageStatus', 'Kullanım durumu boş bırakılamaz').not().isEmpty(),
+  check('dues', 'Aidat bilgisi boş bırakılamaz').not().isEmpty(),
+  check('swap', 'Takas bilgisi boş bırakılamaz').not().isEmpty(),
+]], async (req, res) =>{
+  errors = validationResult(req);
+  if(!errors.isEmpty()){
+    return res.status(400).json({errors: errors.array()});
+  }
+  let location = {
+    province:req.body.province,
+    district:req.body.district,
+    neighborhood:req.body.neighborhood
+  }
+  const newListing= new Listing({
+    user: req.user.id,
+    title: req.body.title,
+    location: location,
+    price:req.body.price,
+    propertyType:req.body.propertyType,
+    propertyStatus:req.body.propertyStatus,
+    grossm2:req.body.grossm2,
+    netm2:req.body.netm2,
+    roomCount:req.body.roomCount,
+    loungeCount:req.body.loungeCount,
+    bathroomCount:req.body.bathroomCount,
+    age:req.body.age,
+    floor:req.body.floor,
+    totalFloor:req.body.totalFloor,
+    heating:req.body.heating,
+    balcony:req.body.balcony,
+    furnished:req.body.furnished,
+    inSite:req.body.inSite,
+    usageStatus:req.body.usageStatus,
+    dues:req.body.dues,
+    swap:req.body.swap,
+  })
+  if(req.body.brief) newListing.brief = req.body.brief;
+  if(req.body.side) newListing.side = req.body.side;
+
+  const listing = await newListing.save();
+  res.json(listing);
+
+});
 
 module.exports = router;
