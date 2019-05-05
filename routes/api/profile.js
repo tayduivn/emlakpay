@@ -5,6 +5,7 @@ const Profile = require("../../models/Profile");
 const User = require("../../models/User");
 const { check, validationResult } = require("express-validator/check");
 
+//Get current user profile
 router.get("/me", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id });
@@ -22,6 +23,7 @@ router.get("/me", auth, async (req, res) => {
   }
 });
 
+//Create new profile
 router.post(
   "/",
   [

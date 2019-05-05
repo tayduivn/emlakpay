@@ -6,6 +6,7 @@ const Listing = require("../../models/Listing");
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
 
+//Create a new listing
 router.post(
   "/",
   [
@@ -120,6 +121,7 @@ router.post(
   }
 );
 
+//Edit existing listing
 router.put(
   "/edit/:id",
   [
@@ -252,6 +254,7 @@ router.put(
   }
 );
 
+//Get all listings
 router.get("/", auth, async (req, res) => {
   try {
     const listings = await Listing.find().sort({ date: -1 });
@@ -262,6 +265,7 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+//Get single listing
 router.get("/:id", auth, async (req, res) => {
   try {
     const listing = await Listing.findById(req.params.id);
@@ -278,6 +282,7 @@ router.get("/:id", auth, async (req, res) => {
   }
 });
 
+//Delete single listings
 router.delete("/:id", auth, async (req, res) => {
   try {
     const listing = await Listing.findById(req.params.id);
@@ -300,6 +305,7 @@ router.delete("/:id", auth, async (req, res) => {
   }
 });
 
+//Fav and unfav a listing
 router.put("/fav/:id", auth, async (req, res) => {
   try {
     const listing = await Listing.findById(req.params.id);
