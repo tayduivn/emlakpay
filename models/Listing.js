@@ -6,7 +6,7 @@ const ListingSchema = new mongoose.Schema({
     ref: "User"
   },
   title: { type: String, required: true },
-  brief: { type: String},
+  brief: { type: String },
   location: {
     province: { type: String, required: true },
     district: { type: String, required: true },
@@ -32,7 +32,11 @@ const ListingSchema = new mongoose.Schema({
   dues: { type: Number, required: true },
   swap: { type: Boolean, required: true },
   side: { type: String }, //Batı Doğu Güney Kuzey
-  favedBy: [{type: mongoose.Schema.Types.ObjectId, ref:'User'}]
+  favedBy: { type: Array, default: [] },
+  date: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 module.exports = Listing = mongoose.model("Listing", ListingSchema);
