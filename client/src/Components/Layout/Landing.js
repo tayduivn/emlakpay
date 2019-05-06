@@ -1,11 +1,11 @@
-import React from 'react'
-import Slider from '../Lib/Slider'
+import React from "react";
+import Slider from "../Lib/Slider";
 const Landing = () => {
   return (
     <div>
-      <Slider/>
+      <Slider />
     </div>
-  )
-}
+  );
+};
 
-export default Landing
+export default Landing;
