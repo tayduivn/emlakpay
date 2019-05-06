@@ -7,7 +7,6 @@ const config = require("config");
 const { check, validationResult } = require("express-validator/check");
 const bcrypt = require("bcryptjs");
 
-//Get current user data
 router.get("/", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
