@@ -1,16 +1,27 @@
 import React from 'react';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css';
 
 import Navigation from "./Components/Layout/Navigation"
-import Slider from './Components/Layout/Slider';
-import Footer from "./Components/Layout/Footer"
+import Landing from './Components/Layout/Landing';
+import Footer from "./Components/Layout/Footer";
+import Register from './Components/Auth/Register';
+import Login from "./Components/Auth/Login";
+
 
 const App = () =>(
-    <div className="wrapper">
-        <Navigation />
-        <Slider />
-        <Footer />
-    </div>
+	<Router>
+		<div className="wrapper">
+			<Navigation />
+			<Route exact path='/' component={Landing} />
+			<Switch>
+				<Route exact path="/register" component={Register} />
+				<Route exact path="/login" component={Login} />
+			</Switch>
+			<Footer />
+		</div>
+	</Router>   
+ 
 )
 
 
