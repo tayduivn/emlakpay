@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {Link} from 'react-router-dom';
+
 const Register = () => {
   const [formData, setFormData] = useState({
     email:'',
@@ -8,12 +9,12 @@ const Register = () => {
   });
   const {email, password, password2} = formData
   const onChange = e => setFormData({...formData, [e.target.name]:e.target.value })
-  const onSubmit = e =>{
+  const onSubmit = async e =>{
       e.preventDefault();
       if(password !== password2){
           console.log('Şifreler eşleşmemektedir.')
       }else{
-          console.log(formData)
+				console.log('success');
       }
   }
   return (
