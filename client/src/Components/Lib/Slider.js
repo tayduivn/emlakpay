@@ -9,9 +9,8 @@ const Slider = () => {
                 <div className="container">
                     <div className="overlay">
                         <div className="info">
-                            <div className="tag price">$ 11,000</div>
-                            <h3>3398 Lodgeville Road</h3>
-                            <figure>Golden Valley, MN 55427</figure>
+                            <div className="tag price">Emlakpay.com</div>
+                            <h3>Emlakçılara özel portföy paylaşım sitesi</h3>
                         </div>
                         <hr/>
                         <a href="property-detail.html" className="link-arrow">Read More</a>
