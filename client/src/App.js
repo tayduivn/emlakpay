@@ -19,6 +19,7 @@ const App = () => (
       </Switch>
       <Footer />
     </div>
+    <div id="overlay" />
   </Router>
 );
 
