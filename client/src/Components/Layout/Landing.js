@@ -17,7 +17,7 @@ const Landing = () => {
         <div className="block has-dark-background background-color-default-darker center text-banner">
           <div className="container">
             <h1 className="no-bottom-margin no-border">
-              Emlakçılara özel portföy paylaşım uygulaması <br />
+              Emlakçılara Özel Portföy Paylaşım Platformu <br />
             </h1>
             <Link to="/login">
               <Button
