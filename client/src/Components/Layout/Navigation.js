@@ -1,7 +1,24 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-
-const Navigation = () => {
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { logout } from "../../actions/auth";
+const Navigation = ({ auth: { isAuthenticated, loading }, logout }) => {
+  const authLinks = (
+    <div className="actions">
+      <Link to="/logout" className="promoted" onClick={logout}>
+        <strong>Çıkış</strong>
+      </Link>
+    </div>
+  );
+  const guestLinks = (
+    <div className="actions">
+      <Link to="/register" className="promoted">
+        <strong>Üye Ol</strong>
+      </Link>
+      <Link to="/login">Giriş Yap</Link>
+    </div>
+  );
   return (
     <div className="navigation" id="page-top">
       <div className="secondary-navigation">
@@ -15,12 +32,9 @@ const Navigation = () => {
             </figure>
           </div>
           <div className="user-area">
-            <div className="actions">
-              <Link to="/register" className="promoted">
-                <strong>Üye Ol</strong>
-              </Link>
-              <Link to="/login">Giriş Yap</Link>
-            </div>
+            {!loading && (
+              <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
+            )}
           </div>
         </div>
       </div>
@@ -92,4 +106,16 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+Navigation.propTypes = {
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { logout }
+)(Navigation);
