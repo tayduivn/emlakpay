@@ -42,16 +42,16 @@ const Footer = () => {
                   <h3>Yararlı Bağlantılar</h3>
                   <ul className="list-unstyled list-links">
                     <li>
-                      <Link to="#">Tüm İlanlar</Link>
+                      <Link to="/listings">Tüm İlanlar</Link>
+                    </li>
+                    <li>
+                      <Link to="/login">Giriş Yap</Link>
+                    </li>
+                    <li>
+                      <Link to="/register">Üye Ol</Link>
                     </li>
                     <li>
                       <Link to="#">Kullanıcı Sözleşmesi</Link>
-                    </li>
-                    <li>
-                      <Link to="#">Giriş Yap</Link>
-                    </li>
-                    <li>
-                      <Link to="#">Üye Ol</Link>
                     </li>
                     <li>
                       <Link to="#">S.S.S</Link>

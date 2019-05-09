@@ -11,6 +11,35 @@ const Navigation = ({ auth: { isAuthenticated, loading }, logout }) => {
       </Link>
     </div>
   );
+  const authMidLinks = (
+    <ul className="nav navbar-nav">
+      <li className="active">
+        <Link to="/">Anasayfa</Link>
+      </li>
+      <li className="has-child">
+        <Link to="/listings">İlanlar</Link>
+        <ul className="child-navigation">
+          <li>
+            <Link to="properties-listing.html">İlan Ekle</Link>
+          </li>
+          <li>
+            <Link to="properties-listing-grid.html">İlanlarım</Link>
+          </li>
+          <li>
+            <Link to="properties-listing-lines.html">Favori İlanlarım</Link>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <Link to="/me">Profilim</Link>
+      </li>
+
+      <li>
+        <Link to="/contact">İletişim</Link>
+      </li>
+    </ul>
+  );
   const guestLinks = (
     <div className="actions">
       <Link to="/register" className="promoted">
@@ -19,6 +48,19 @@ const Navigation = ({ auth: { isAuthenticated, loading }, logout }) => {
       <Link to="/login">Giriş Yap</Link>
     </div>
   );
+
+  const guestMidLinks = (
+    <ul className="nav navbar-nav">
+      <li className="active">
+        <Link to="/">Anasayfa</Link>
+      </li>
+
+      <li>
+        <Link to="/contact">İletişim</Link>
+      </li>
+    </ul>
+  );
+
   return (
     <div className="navigation" id="page-top">
       <div className="secondary-navigation">
@@ -62,37 +104,11 @@ const Navigation = ({ auth: { isAuthenticated, loading }, logout }) => {
             className="collapse navbar-collapse bs-navbar-collapse navbar-right"
             role="navigation"
           >
-            <ul className="nav navbar-nav">
-              <li className="active">
-                <Link to="/">Anasayfa</Link>
-              </li>
-              <li className="has-child">
-                <Link to="/listings">İlanlar</Link>
-                <ul className="child-navigation">
-                  <li>
-                    <Link to="properties-listing.html">İlan Ekle</Link>
-                  </li>
-                  <li>
-                    <Link to="properties-listing-grid.html">İlanlarım</Link>
-                  </li>
-                  <li>
-                    <Link to="properties-listing-lines.html">
-                      Favori İlanlarım
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-
-              <li>
-                <Link to="/">Profilim</Link>
-              </li>
-              <li>
-                <Link to="/me">Blog</Link>
-              </li>
-              <li>
-                <Link to="/contact">İletişim</Link>
-              </li>
-            </ul>
+            {!loading && (
+              <Fragment>
+                {isAuthenticated ? authMidLinks : guestMidLinks}
+              </Fragment>
+            )}
           </nav>
           <div className="add-your-property">
             <Link to="submit.html" className="btn btn-default">
