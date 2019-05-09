@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Navigation = () => {
   return (
-    <div className="navigation">
+    <div className="navigation" id="page-top">
       <div className="secondary-navigation">
         <div className="container">
           <div className="contact">
@@ -68,27 +68,12 @@ const Navigation = () => {
                   </li>
                 </ul>
               </li>
-              <li className="has-child">
-                <Link to="/reqs">Emlak Talepleri</Link>
-                <ul className="child-navigation">
-                  <li>
-                    <Link to="properties-listing.html">Talep Ekle</Link>
-                  </li>
-                  <li>
-                    <Link to="properties-listing-grid.html">Taleplerim</Link>
-                  </li>
-                  <li>
-                    <Link to="properties-listing-lines.html">
-                      Favori Taleplerim
-                    </Link>
-                  </li>
-                </ul>
-              </li>
+
               <li>
                 <Link to="/">Profilim</Link>
               </li>
               <li>
-                <Link to="#">Blog</Link>
+                <Link to="/me">Blog</Link>
               </li>
               <li>
                 <Link to="/contact">İletişim</Link>

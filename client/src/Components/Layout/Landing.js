@@ -59,8 +59,9 @@ const Landing = () => {
                       <h3>Üye Olun</h3>
                     </header>
                     <p>
-                      Buraya tıklayın ve formu doldurun. Üye olmak 5 saniye
-                      sürer. Üye olduktan sonra kendinize bir profil oluşturun.
+                      <Link to="/register">Buraya</Link> tıklayın ve formu
+                      doldurun. Üye olmak 5 saniye sürer. Üye olduktan sonra
+                      kendinize bir profil oluşturun.
                     </p>
                   </aside>
                 </div>

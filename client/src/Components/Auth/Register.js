@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { setAlert } from "../../actions/alert";
+import { register } from "../../actions/auth";
 import PropTypes from "prop-types";
 import Alert from "../Layout/Alert";
-const Register = ({ setAlert }) => {
+
+const Register = ({ setAlert, register }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -18,7 +20,7 @@ const Register = ({ setAlert }) => {
     if (password !== password2) {
       setAlert("Şifreler eşleşmemektedir.", "danger");
     } else {
-      console.log("success");
+      register({ email, password });
     }
   };
   return (
@@ -48,7 +50,6 @@ const Register = ({ setAlert }) => {
                   name="email"
                   value={email}
                   onChange={e => onChange(e)}
-                  required
                 />
               </div>
               <div className="form-group">
@@ -60,7 +61,6 @@ const Register = ({ setAlert }) => {
                   name="password"
                   value={password}
                   onChange={e => onChange(e)}
-                  required
                 />
               </div>
               <div className="form-group">
@@ -74,7 +74,6 @@ const Register = ({ setAlert }) => {
                   name="password2"
                   value={password2}
                   onChange={e => onChange(e)}
-                  required
                 />
               </div>
               <Alert />
@@ -104,10 +103,11 @@ const Register = ({ setAlert }) => {
 };
 
 Register.propTypes = {
-  setAlert: PropTypes.func.isRequired
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired
 };
 
 export default connect(
   null,
-  { setAlert }
+  { setAlert, register }
 )(Register);
