@@ -6,8 +6,16 @@ import { logout } from "../../actions/auth";
 const Navigation = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
     <div className="actions">
+      <Link to="/account">
+        <strong>
+          <i class="fa fa-cogs" aria-hidden="true" /> Hesabım
+        </strong>
+      </Link>
       <Link to="/logout" className="promoted" onClick={logout}>
-        <strong>Çıkış</strong>
+        <strong>
+          <i class="fa fa-sign-out" aria-hidden="true" />
+          Çıkış
+        </strong>
       </Link>
     </div>
   );
