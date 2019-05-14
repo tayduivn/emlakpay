@@ -3,11 +3,20 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
 import { Link } from "react-router-dom";
-const Account = ({ getCurrentProfile, auth, profile }) => {
+import Loading from "../Layout/Loading";
+const Account = ({
+  getCurrentProfile,
+  auth,
+  profile: { profile, loading }
+}) => {
   useEffect(() => {
     getCurrentProfile();
   }, []);
-  return (
+  return loading && profile == null ? (
+    <div className="loading">
+      <Loading />
+    </div>
+  ) : (
     <div id="page-content">
       <div className="container">
         <ol className="breadcrumb">

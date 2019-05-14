@@ -1,8 +1,14 @@
 import React from "react";
 import Image from "react-bootstrap/Image";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Button from "@material-ui/core/Button";
-const Landing = () => {
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
+const Landing = ({ isAuthenticated }) => {
+  if (isAuthenticated) {
+    return <Redirect to="/me" />;
+  }
   return (
     <div>
       <Image
@@ -124,4 +130,11 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+Landing.propTypes = {
+  isAuthenticated: PropTypes.bool
+};
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps)(Landing);
