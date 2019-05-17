@@ -8,7 +8,7 @@ import Footer from "./Components/Layout/Footer";
 import Register from "./Components/Auth/Register";
 import Login from "./Components/Auth/Login";
 import Account from "./Components/Account/Account";
-import Me from "./Components/Profile/Profile";
+import Me from "./Components/Profile/Me";
 import PrivateRoute from "./Components/Routing/PrivateRoute";
 
 //Redux

@@ -8,12 +8,12 @@ const Navigation = ({ auth: { isAuthenticated, loading }, logout }) => {
     <div className="actions">
       <Link to="/account">
         <strong>
-          <i class="fa fa-cogs" aria-hidden="true" /> Hesabım
+          <i className="fa fa-cogs" aria-hidden="true" /> Hesabım
         </strong>
       </Link>
       <Link to="/logout" className="promoted" onClick={logout}>
         <strong>
-          <i class="fa fa-sign-out" aria-hidden="true" />
+          <i className="fa fa-sign-out" aria-hidden="true" />
           Çıkış
         </strong>
       </Link>

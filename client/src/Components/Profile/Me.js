@@ -5,7 +5,7 @@ import { getCurrentProfile } from "../../actions/profile";
 import { Link } from "react-router-dom";
 import ListingGrid from "../Listing/Grid";
 import Loading from "../Layout/Loading";
-const Profile = ({ getCurrentProfile, profile: { profile, loading } }) => {
+const Me = ({ getCurrentProfile, profile: { profile, loading } }) => {
   useEffect(() => {
     getCurrentProfile();
   }, []);
@@ -16,7 +16,37 @@ const Profile = ({ getCurrentProfile, profile: { profile, loading } }) => {
       </div>
     );
   } else if (!profile) {
-    return <div>Profil yok</div>;
+    return (
+      <div id="page-content">
+        <div>
+          <div className="container">
+            <ol className="breadcrumb">
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/profiles">Profiller</Link>
+              </li>
+              <li className="active">Profilim</li>
+            </ol>
+          </div>
+          <div className="container">
+            <section id="agent-detail">
+              <header>
+                <h1 />
+              </header>
+              <section id="agent-info">
+                <h3>Henüz herkese açık bir profil oluşturmadınız</h3>
+                <p>
+                  <Link to="/account">Buraya </Link> tıklayarak herkese açık bir
+                  profil oluşturun ve görünür olmaya başlayın.
+                </p>
+              </section>
+            </section>
+          </div>
+        </div>
+      </div>
+    );
   } else {
     return (
       <div id="page-content">
@@ -137,7 +167,7 @@ const Profile = ({ getCurrentProfile, profile: { profile, loading } }) => {
   }
 };
 
-Profile.propTypes = {
+Me.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired
 };
@@ -148,4 +178,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getCurrentProfile }
-)(Profile);
+)(Me);

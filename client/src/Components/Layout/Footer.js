@@ -68,7 +68,7 @@ const Footer = () => {
             <span>© 2019 Emlakpay.com bir Tekent Bilişim A.Ş girişimidir.</span>
             <span className="pull-right">
               <a href="#page-top" className="roll">
-                <i class="fa fa-arrow-up" aria-hidden="true" />
+                <i className="fa fa-arrow-up" aria-hidden="true" />
               </a>
             </span>
           </div>

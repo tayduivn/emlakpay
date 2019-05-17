@@ -4,7 +4,7 @@ const Loading = () => {
   return (
     <div>
       <div id="loading-icon">
-        <i class="fa fa-cog fa-spin" />
+        <i className="fa fa-cog fa-spin" />
       </div>
     </div>
   );

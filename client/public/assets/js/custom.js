@@ -348,7 +348,7 @@ $(window).load(function() {
 
   //  Show All button
 
-  showAllButton();
+  // showAllButton();
 
   //  Draw thumbnails in the footer
 
