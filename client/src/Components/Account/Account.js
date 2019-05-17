@@ -4,15 +4,12 @@ import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
 import { Link } from "react-router-dom";
 import Loading from "../Layout/Loading";
-const Account = ({
-  getCurrentProfile,
-  auth,
-  profile: { profile, loading }
-}) => {
+const Account = ({ getCurrentProfile, profile: { profile, loading } }) => {
   useEffect(() => {
     getCurrentProfile();
   }, []);
-  return loading && profile == null ? (
+
+  return loading ? (
     <div className="loading">
       <Loading />
     </div>
@@ -38,7 +35,7 @@ const Account = ({
           <div className="account-profile">
             <div className="row">
               <div className="col-md-3 col-sm-3">
-                <img alt="" className="image" src="assets/img/agent-01.jpg" />
+                <img alt="" className="image" src={profile && profile.avatar} />
               </div>
               <div className="col-md-9 col-sm-9">
                 <form id="form-account-profile" method="post">
@@ -56,7 +53,7 @@ const Account = ({
                             id="form-account-name"
                             name="form-account-name"
                             required
-                            value="Jeffrey"
+                            value={profile && profile.name}
                           />
                         </div>
                       </dd>
@@ -71,7 +68,7 @@ const Account = ({
                             id="form-account-name"
                             name="form-account-name"
                             required
-                            value="Scott"
+                            value={profile && profile.surname}
                           />
                         </div>
                       </dd>
@@ -86,7 +83,7 @@ const Account = ({
                             id="form-account-name"
                             name="form-account-name"
                             required
-                            value="Remax"
+                            value={profile && profile.company}
                           />
                         </div>
                       </dd>
@@ -100,7 +97,7 @@ const Account = ({
                             className="form-control"
                             id="form-account-phone"
                             name="form-account-phone"
-                            value="(123) 456 789"
+                            value={profile && profile.phoneNo}
                           />
                         </div>
                       </dd>
@@ -113,8 +110,8 @@ const Account = ({
                             type="text"
                             className="form-control"
                             id="form-account-email"
-                            name="form-account-phone"
-                            value="jeffrey.scott@example.com"
+                            name="form-account-email"
+                            value={profile && profile.email}
                           />
                         </div>
                       </dd>
@@ -129,13 +126,7 @@ const Account = ({
                         rows="5"
                         name="form-contact-agent-message"
                       >
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Cras et dui vestibulum, bibendum purus sit amet,
-                        vulputate mauris. Ut adipiscing gravida tincidunt. Duis
-                        euismod placerat rhoncus. Phasellus mollis imperdiet
-                        placerat. Sed ac turpis nisl. Mauris at ante mauris.
-                        Aliquam posuere fermentum lorem, a aliquam mauris
-                        rutrum.
+                        {profile && profile.bio}
                       </textarea>
                     </div>
                   </section>
@@ -151,6 +142,7 @@ const Account = ({
                           className="form-control"
                           id="account-social-linkedin"
                           name="account-social-linkedin"
+                          value={profile && profile.social.linkedin}
                         />
                       </div>
                     </div>
@@ -165,6 +157,7 @@ const Account = ({
                           className="form-control"
                           id="account-social-facebook"
                           name="account-social-facebook"
+                          value={profile && profile.social.facebook}
                         />
                       </div>
                     </div>
@@ -178,6 +171,7 @@ const Account = ({
                           className="form-control"
                           id="account-social-twitter"
                           name="account-social-twitter"
+                          value={profile && profile.social.twitter}
                         />
                       </div>
                     </div>
@@ -264,11 +258,9 @@ const Account = ({
 
 Account.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
-  auth: state.auth,
   profile: state.profile
 });
 
