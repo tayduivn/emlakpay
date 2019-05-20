@@ -100,9 +100,10 @@ const Account = ({
                   style={{
                     width: "150px",
                     height: "150px",
-                    backgroundSize: "cover",
-                    backgroundPosition: "top center",
-                    borderRadius: "50%"
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    borderRadius: "50%",
+                    display: "block"
                   }}
                 />
               </div>
