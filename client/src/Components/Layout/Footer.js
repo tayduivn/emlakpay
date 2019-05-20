@@ -1,9 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import Alert from "./Alert";
 const Footer = () => {
   return (
     <footer id="page-footer">
+      <div
+        style={{
+          position: "fixed",
+          bottom: "5px",
+          left: "2%",
+          zIndex: 100
+        }}
+      >
+        <Alert />
+      </div>
+
       <div className="inner">
         <aside id="footer-main">
           <div className="container">

@@ -4,7 +4,6 @@ import { Link, Redirect } from "react-router-dom";
 import { setAlert } from "../../actions/alert";
 import { register } from "../../actions/auth";
 import PropTypes from "prop-types";
-import Alert from "../Layout/Alert";
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
@@ -24,7 +23,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     }
   };
   if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to="/me" />;
   }
   return (
     <div id="page-content">
@@ -79,7 +78,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                   onChange={e => onChange(e)}
                 />
               </div>
-              <Alert />
+
               <div className="form-group clearfix">
                 <button
                   type="submit"

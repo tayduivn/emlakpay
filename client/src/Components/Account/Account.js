@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getCurrentProfile } from "../../actions/profile";
 import { Link, withRouter } from "react-router-dom";
 import Loading from "../Layout/Loading";
-import { createProfile } from "../../actions/profile";
-import Alert from "../Layout/Alert";
+import { createProfile, getCurrentProfile } from "../../actions/profile";
 import { setAlert } from "../../actions/alert";
 const Account = ({
   setAlert,
@@ -21,11 +19,34 @@ const Account = ({
     bio: "",
     phoneNo: "",
     email: "",
-    avatar: "",
+    avatar: "/assets/img/member-01.jpg",
     linkedin: "",
     facebook: "",
     twitter: ""
   });
+
+  useEffect(() => {
+    getCurrentProfile();
+    if (profile) {
+      setFormData({
+        name: loading || !profile.name ? "" : profile.name,
+        surname: loading || !profile.surname ? "" : profile.surname,
+        company: loading || !profile.company ? "" : profile.company,
+        bio: loading || !profile.bio ? "" : profile.bio,
+        phoneNo: loading || !profile.phoneNo ? "" : profile.phoneNo,
+        email: loading || !profile.email ? "" : profile.email,
+        avatar:
+          loading || !profile.avatar
+            ? "/assets/img/member-01.jpg"
+            : profile.avatar,
+        linkedin: loading || !profile.social ? "" : profile.social.linkedin,
+        facebook: loading || !profile.social ? "" : profile.social.facebook,
+        twitter: loading || !profile.social ? "" : profile.social.twitter
+      });
+    }
+  }, [loading]);
+  // console.log(profile);
+
   const {
     name,
     surname,
@@ -43,11 +64,8 @@ const Account = ({
   };
   const onSubmit = e => {
     e.preventDefault();
-    createProfile(formData, history, true);
+    createProfile(formData, history);
   };
-  useEffect(() => {
-    getCurrentProfile();
-  }, []);
 
   return loading ? (
     <div className="loading">
@@ -78,11 +96,14 @@ const Account = ({
                 <img
                   alt=""
                   className="image"
-                  src={
-                    profile && profile.avatar != null
-                      ? profile.avatar
-                      : "assets/img/agent-01.jpg"
-                  }
+                  src={avatar}
+                  style={{
+                    width: "150px",
+                    height: "150px",
+                    backgroundSize: "cover",
+                    backgroundPosition: "top center",
+                    borderRadius: "50%"
+                  }}
                 />
               </div>
 
@@ -240,7 +261,6 @@ const Account = ({
                     </div>
                   </section>
                 </form>
-                <Alert />
                 <section id="change-password">
                   <header>
                     <h2>Şifremi Değiştir</h2>
