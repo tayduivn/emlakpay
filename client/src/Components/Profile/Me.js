@@ -51,6 +51,7 @@ const Me = ({ getCurrentProfile, profile: { profile, loading } }) => {
         </div>
       );
     } else {
+      const { name, surname, avatar } = profile;
       return (
         <div id="page-content">
           <div>
@@ -69,16 +70,30 @@ const Me = ({ getCurrentProfile, profile: { profile, loading } }) => {
               <section id="agent-detail">
                 <header>
                   <h1>
-                    {profile.name} {profile.surname}
+                    {name} {surname}
                   </h1>
                 </header>
                 <section id="agent-info">
                   <div className="row">
                     <div className="col-md-3 col-sm-3">
                       <figure className="agent-image">
-                        <img alt="" src="assets/img/agent-01.jpg" />
+                        <img
+                          alt=""
+                          className="image"
+                          src={avatar}
+                          style={{
+                            width: "150px",
+                            height: "150px",
+                            marginLeft: "auto",
+                            marginRight: "auto",
+                            borderRadius: "50%",
+                            display: "block",
+                            marginBottom: "20px"
+                          }}
+                        />
                       </figure>
                     </div>
+
                     <div className="col-md-5 col-sm-5">
                       <h3>Contact Info</h3>
                       <dl>

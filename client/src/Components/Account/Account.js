@@ -320,7 +320,7 @@ const Account = ({
                       <strong>Dikkat:</strong>
                       <p>
                         Hesabı sile tıklarsanız; hesabınız, varsa hesaba bağlı
-                        profiliniz, eklediğiniz bütün listelemeler ve girdiğiniz
+                        profiliniz, eklediğiniz bütün ilanlar ve girdiğiniz
                         bütün veriler silinir. Bu işlem geri alınamaz.
                       </p>
                       <div className="form-group clearfix">
