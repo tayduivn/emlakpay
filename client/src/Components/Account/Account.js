@@ -3,13 +3,16 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import Loading from "../Layout/Loading";
-import { createProfile, getCurrentProfile } from "../../actions/profile";
-import { setAlert } from "../../actions/alert";
+import {
+  createProfile,
+  getCurrentProfile,
+  deleteAccount
+} from "../../actions/profile";
 const Account = ({
-  setAlert,
   createProfile,
   history,
   getCurrentProfile,
+  deleteAccount,
   profile: { profile, loading }
 }) => {
   const [formData, setFormData] = useState({
@@ -314,12 +317,21 @@ const Account = ({
                       </form>
                     </div>
                     <div className="col-md-6 col-sm-6">
-                      <strong>Hint:</strong>
+                      <strong>Dikkat:</strong>
                       <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Cras et dui vestibulum, bibendum purus sit amet,
-                        vulputate mauris.
+                        Hesabı sile tıklarsanız; hesabınız, varsa hesaba bağlı
+                        profiliniz, eklediğiniz bütün listelemeler ve girdiğiniz
+                        bütün veriler silinir. Bu işlem geri alınamaz.
                       </p>
+                      <div className="form-group clearfix">
+                        <button
+                          type="submit"
+                          className="btn btn-danger"
+                          onClick={() => deleteAccount()}
+                        >
+                          Hesabı Sil
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </section>
@@ -336,7 +348,7 @@ Account.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   createProfile: PropTypes.func.isRequired,
-  setAlert: PropTypes.func.isRequired
+  deleteAccount: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
   profile: state.profile
@@ -344,5 +356,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile, createProfile, setAlert }
+  { getCurrentProfile, createProfile, deleteAccount }
 )(withRouter(Account));

@@ -46,6 +46,7 @@ export const register = ({ email, password }) => async dispatch => {
       payload: res.data
     });
     dispatch(loadUser());
+    dispatch(setAlert("Emlakpay.com a hoşgeldiniz.", "success"));
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {

@@ -3,6 +3,7 @@ const router = express.Router();
 const auth = require("../../middleware/auth");
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
+const Listing = require("../../models/Listing");
 const { check, validationResult } = require("express-validator/check");
 
 router.get("/me", auth, async (req, res) => {
@@ -124,10 +125,11 @@ router.get("/detail/:user_id", auth, async (req, res) => {
 //Delete the user, profile and related properties
 router.delete("/", auth, async (req, res) => {
   try {
+    await Listing.deleteMany({ user: req.user.id });
     await Profile.findOneAndDelete({ user: req.user.id });
     await User.findOneAndDelete({ _id: req.user.id });
     res.json({
-      msg: "Kullanıcı ve kullanıcıya ait bütün ilanlar başarıyla silindi."
+      msg: "Kullanıcı ve kullanıcıya ait bütün veriler başarıyla silindi."
     });
   } catch (err) {
     console.error(err.message);
