@@ -104,7 +104,7 @@ router.get("/", auth, async (req, res) => {
 });
 
 //get profile by user id
-router.get("/detail/:user_id", auth, async (req, res) => {
+router.get("/user/:user_id", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({
       user: req.params.user_id

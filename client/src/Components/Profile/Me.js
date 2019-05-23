@@ -10,7 +10,6 @@ const Me = ({ getCurrentProfile, profile: { profile, loading } }) => {
   useEffect(() => {
     getCurrentProfile();
   }, []);
-  console.log(loading);
   if (loading) {
     return (
       <div className="loading">
@@ -51,7 +50,19 @@ const Me = ({ getCurrentProfile, profile: { profile, loading } }) => {
         </div>
       );
     } else {
-      const { name, surname, avatar } = profile;
+      const {
+        name,
+        surname,
+        avatar,
+        phoneNo,
+        company,
+        bio,
+        email,
+        social
+      } = profile;
+      let socialDiv;
+      if (social) {
+      }
       return (
         <div id="page-content">
           <div>
@@ -95,40 +106,26 @@ const Me = ({ getCurrentProfile, profile: { profile, loading } }) => {
                     </div>
 
                     <div className="col-md-5 col-sm-5">
-                      <h3>Contact Info</h3>
+                      <h3>İletişim</h3>
                       <dl>
-                        <dt>Phone:</dt>
-                        <dd>(123) 456 789</dd>
-                        <dt>Mobile:</dt>
-                        <dd>888 123 456 789</dd>
-                        <dt>Email:</dt>
-                        <dd>
-                          <a href="mailto:#">john.doe@example.com</a>
-                        </dd>
-                        <dt>Skype:</dt>
-                        <dd>john.doe</dd>
+                        <dt>Tel No:</dt>
+                        <dd>{phoneNo}</dd>
+                        <dt>E-posta:</dt>
+                        <dd>{email}</dd>
                       </dl>
                     </div>
                     <div className="col-md-4 col-sm-4">
-                      <h3>Shortly About Me</h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Cras et dui vestibulum, bibendum purus sit amet,
-                        vulputate mauris. Ut adipiscing gravida tincidunt. Duis
-                        euismod placerat rhoncus. Phasellus mollis imperdiet
-                        placerat.
-                      </p>
+                      <h3>Hakkımda</h3>
+                      <p>{bio}</p>
                     </div>
                   </div>
                   <div className="row">
                     <div className="col-md-offset-3 col-md-5 col-sm-offset-3 col-sm-5">
-                      <h3>Agency</h3>
-                      <a href="agency-detail.html" className="agency-logo">
-                        <img alt="" src="assets/img/agency-logo-01.png" />
-                      </a>
+                      <h3>Emlak Ofisi</h3>
+                      <p style={{ fontSize: "20px" }}>{company}</p>
                     </div>
                     <div className="col-md-4 col-sm-4">
-                      <h3>My Social Profiles</h3>
+                      <h3>Sosyal Ağlar</h3>
                       <div className="agent-social">
                         <a
                           href="#"

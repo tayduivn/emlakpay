@@ -4,11 +4,10 @@ import { setAlert } from "./alert";
 import {
   GET_PROFILE,
   PROFILE_ERROR,
-  SET_ALERT,
   CLEAR_PROFILE,
-  ACCOUNT_DELETED
+  ACCOUNT_DELETED,
+  GET_PROFILES
 } from "./types";
-import { dispatch } from "rxjs/internal/observable/pairs";
 
 export const getCurrentProfile = () => async dispatch => {
   try {
@@ -25,8 +24,39 @@ export const getCurrentProfile = () => async dispatch => {
   }
 };
 
-//Create or Update profile
+//Get all profiles
+export const getProfiles = () => async dispatch => {
+  try {
+    const res = await axios.get("/api/profile");
+    dispatch({
+      type: GET_PROFILES,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
 
+//Get all profiles
+export const getProfileById = userId => async dispatch => {
+  try {
+    const res = await axios.get(`/api/profile/user/${userId}`);
+    dispatch({
+      type: GET_PROFILES,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+//Create or Update profile
 export const createProfile = (formData, history) => async dispatch => {
   console.log(formData);
   try {

@@ -9,6 +9,8 @@ import Register from "./Components/Auth/Register";
 import Login from "./Components/Auth/Login";
 import Account from "./Components/Account/Account";
 import Me from "./Components/Profile/Me";
+import Profiles from "./Components/Profiles/Profiles";
+
 import PrivateRoute from "./Components/Routing/PrivateRoute";
 
 //Redux
@@ -30,13 +32,14 @@ const App = () => {
       <Router>
         <div className="wrapper">
           <Navigation />
-          <Route exact path="/" component={Landing} />
 
           <Switch>
+            <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
-            <PrivateRoute exact path="/account" component={Account} />
             <PrivateRoute exact path="/me" component={Me} />
+            <PrivateRoute exact path="/account" component={Account} />
+            <PrivateRoute exact path="/profiles" component={Profiles} />
           </Switch>
           <Footer />
         </div>

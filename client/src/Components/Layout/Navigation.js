@@ -38,9 +38,16 @@ const Navigation = ({ auth: { isAuthenticated, loading }, logout }) => {
           </li>
         </ul>
       </li>
-
-      <li>
-        <Link to="/me">Profilim</Link>
+      <li className="has-child">
+        <Link to="/profiles">Profiller</Link>
+        <ul className="child-navigation">
+          <li>
+            <Link to="/profiles">Tüm Profiller</Link>
+          </li>
+          <li>
+            <Link to="/me">Profilim</Link>
+          </li>
+        </ul>
       </li>
 
       <li>
