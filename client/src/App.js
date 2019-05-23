@@ -7,6 +7,7 @@ import Landing from "./Components/Layout/Landing";
 import Footer from "./Components/Layout/Footer";
 import Register from "./Components/Auth/Register";
 import Login from "./Components/Auth/Login";
+import Logout from "./Components/Auth/Logout";
 import Account from "./Components/Account/Account";
 import Me from "./Components/Profile/Me";
 import Profiles from "./Components/Profiles/Profiles";
@@ -32,11 +33,11 @@ const App = () => {
       <Router>
         <div className="wrapper">
           <Navigation />
-
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/logout" component={Logout} />
             <PrivateRoute exact path="/me" component={Me} />
             <PrivateRoute exact path="/account" component={Account} />
             <PrivateRoute exact path="/profiles" component={Profiles} />

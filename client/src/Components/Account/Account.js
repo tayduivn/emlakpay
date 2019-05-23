@@ -25,7 +25,8 @@ const Account = ({
     avatar: "/assets/img/member-01.jpg",
     linkedin: "",
     facebook: "",
-    twitter: ""
+    twitter: "",
+    city: ""
   });
 
   useEffect(() => {
@@ -38,6 +39,7 @@ const Account = ({
         bio: loading || !profile.bio ? "" : profile.bio,
         phoneNo: loading || !profile.phoneNo ? "" : profile.phoneNo,
         email: loading || !profile.email ? "" : profile.email,
+        city: loading || !profile.city ? "" : profile.city,
         avatar:
           loading || !profile.avatar
             ? "/assets/img/member-01.jpg"
@@ -60,7 +62,8 @@ const Account = ({
     avatar,
     linkedin,
     facebook,
-    twitter
+    twitter,
+    city
   } = formData;
   const onChange = e => {
     return setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -157,6 +160,21 @@ const Account = ({
                             id="form-account-comp"
                             name="company"
                             value={company}
+                            onChange={e => onChange(e)}
+                          />
+                        </div>
+                      </dd>
+                      <dt>
+                        <label htmlFor="form-city">Şehir:</label>
+                      </dt>
+                      <dd>
+                        <div className="form-group">
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="form-city"
+                            name="city"
+                            value={city}
                             onChange={e => onChange(e)}
                           />
                         </div>

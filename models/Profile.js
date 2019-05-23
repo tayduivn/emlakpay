@@ -6,9 +6,10 @@ const ProfileSchema = new mongoose.Schema({
   surname: { type: String, required: true },
   company: { type: String },
   bio: { type: String },
-  phoneNo: { type: String, required: true },
+  phoneNo: { type: String },
   email: { type: String },
   avatar: { type: String },
+  city: { type: String },
   social: {
     linkedin: {
       type: String

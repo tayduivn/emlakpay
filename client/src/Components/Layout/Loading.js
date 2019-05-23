@@ -2,7 +2,7 @@ import React from "react";
 
 const Loading = () => {
   return (
-    <div>
+    <div className="loading">
       <div id="loading-icon">
         <i className="fa fa-cog fa-spin" />
       </div>

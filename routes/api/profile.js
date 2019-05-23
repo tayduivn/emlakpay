@@ -33,9 +33,6 @@ router.post(
         .isEmpty(),
       check("surname", "Soy isim alanı zorunludur.")
         .not()
-        .isEmpty(),
-      check("phoneNo", "İletişim numarası alanı zorunludur.")
-        .not()
         .isEmpty()
     ]
   ],
@@ -55,7 +52,8 @@ router.post(
       avatar,
       linkedin,
       twitter,
-      facebook
+      facebook,
+      city
     } = req.body;
 
     const profileFields = {};
@@ -67,6 +65,7 @@ router.post(
     if (phoneNo) profileFields.phoneNo = phoneNo;
     if (email) profileFields.email = email;
     if (avatar) profileFields.avatar = avatar;
+    if (city) profileFields.city = city;
 
     profileFields.social = {};
     if (linkedin) profileFields.social.linkedin = linkedin;

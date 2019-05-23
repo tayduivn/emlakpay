@@ -26,6 +26,7 @@ export const getCurrentProfile = () => async dispatch => {
 
 //Get all profiles
 export const getProfiles = () => async dispatch => {
+  console.log("asd");
   try {
     const res = await axios.get("/api/profile");
     dispatch({
@@ -57,7 +58,7 @@ export const getProfileById = userId => async dispatch => {
 };
 
 //Create or Update profile
-export const createProfile = (formData, history) => async dispatch => {
+export const createProfile = formData => async dispatch => {
   console.log(formData);
   try {
     const config = {
