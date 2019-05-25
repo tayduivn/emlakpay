@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   useEffect(() => {
     getProfiles();
-  }, []);
+  }, [getProfiles]);
   return (
     <div>
       {loading ? (

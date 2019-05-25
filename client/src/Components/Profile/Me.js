@@ -9,11 +9,11 @@ import Loading from "../Layout/Loading";
 const Me = ({ getCurrentProfile, profile: { profile, loading } }) => {
   useEffect(() => {
     getCurrentProfile();
-  }, []);
+  }, [getCurrentProfile]);
 
   return (
     <Fragment>
-      {loading ? (
+      {loading && profile == null ? (
         <Loading />
       ) : (
         <div id="page-content">
@@ -32,9 +32,6 @@ const Me = ({ getCurrentProfile, profile: { profile, loading } }) => {
             {!profile ? (
               <div className="container">
                 <section id="agent-detail">
-                  <header>
-                    <h1 />
-                  </header>
                   <section id="agent-info">
                     <h3>Henüz herkese açık bir profil oluşturmadınız</h3>
                     <p>
@@ -77,11 +74,11 @@ const Me = ({ getCurrentProfile, profile: { profile, loading } }) => {
                         <h3>İletişim</h3>
                         <dl>
                           <dt>Tel No:</dt>
-                          <dd>{profile.phoneNo}</dd>
+                          <dd>{profile.phoneNo ? profile.phoneNo : "-"}</dd>
                           <dt>E-posta:</dt>
-                          <dd>{profile.email}</dd>
+                          <dd>{profile.email ? profile.email : "-"}</dd>
                           <dt>Şehir:</dt>
-                          <dd>{profile.city}</dd>
+                          <dd>{profile.city ? profile.city : "-"}</dd>
                         </dl>
                       </div>
                       <div className="col-md-4 col-sm-4">
@@ -92,25 +89,43 @@ const Me = ({ getCurrentProfile, profile: { profile, loading } }) => {
                     <div className="row">
                       <div className="col-md-offset-3 col-md-5 col-sm-offset-3 col-sm-5">
                         <h3>Emlak Ofisi</h3>
-                        <p style={{ fontSize: "20px" }}>{profile.company}</p>
+                        <p style={{ fontSize: "20px" }}>
+                          {profile.company ? profile.company : "-"}
+                        </p>
                       </div>
-                      <div className="col-md-4 col-sm-4">
-                        <h3>Sosyal Ağlar</h3>
-                        <div className="agent-social">
-                          <a
-                            href="#"
-                            className="fa fa-twitter btn btn-grey-dark"
-                          />
-                          <a
-                            href="#"
-                            className="fa fa-facebook btn btn-grey-dark"
-                          />
-                          <a
-                            href="#"
-                            className="fa fa-linkedin btn btn-grey-dark"
-                          />
+                      {profile.social ? (
+                        <div className="col-md-4 col-sm-4">
+                          <h3>Sosyal Ağlar</h3>
+                          <div className="agent-social">
+                            {profile.social.twitter ? (
+                              <a
+                                href={profile.social.twitter}
+                                className="fa fa-twitter btn btn-grey-dark"
+                              />
+                            ) : (
+                              ""
+                            )}
+                            {profile.social.facebook ? (
+                              <a
+                                href={profile.social.facebook}
+                                className="fa fa-facebook btn btn-grey-dark"
+                              />
+                            ) : (
+                              ""
+                            )}
+                            {profile.social.linkedin ? (
+                              <a
+                                href={profile.social.linkedin}
+                                className="fa fa-linkedin btn btn-grey-dark"
+                              />
+                            ) : (
+                              ""
+                            )}
+                          </div>
                         </div>
-                      </div>
+                      ) : (
+                        <div />
+                      )}
                     </div>
                   </section>
                   <hr className="thick" />
