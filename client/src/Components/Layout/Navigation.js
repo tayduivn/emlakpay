@@ -111,7 +111,7 @@ const Navigation = ({ auth: { isAuthenticated, loading }, logout }) => {
             </button>
             <div className="navbar-brand nav" id="brand">
               <Link to="/">
-                <img src="assets/img/logo.png" alt="brand" />
+                <img src="/assets/img/logo.png" alt="brand" />
               </Link>
             </div>
           </div>

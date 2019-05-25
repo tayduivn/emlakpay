@@ -3,9 +3,14 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import Loading from "../Layout/Loading";
-import { createProfile, deleteAccount } from "../../actions/profile";
+import {
+  createProfile,
+  deleteAccount,
+  getCurrentProfile
+} from "../../actions/profile";
 
 const Account = ({
+  getCurrentProfile,
   createProfile,
   deleteAccount,
   profile: { profile, loading }
@@ -25,6 +30,7 @@ const Account = ({
   });
 
   useEffect(() => {
+    getCurrentProfile();
     if (profile) {
       setFormData({
         name: loading || !profile.name ? "" : profile.name,
@@ -43,7 +49,7 @@ const Account = ({
         twitter: loading || !profile.social ? "" : profile.social.twitter
       });
     }
-  }, [profile, loading]);
+  }, [profile, loading, getCurrentProfile]);
 
   const {
     name,
@@ -358,7 +364,8 @@ const Account = ({
 Account.propTypes = {
   profile: PropTypes.object.isRequired,
   createProfile: PropTypes.func.isRequired,
-  deleteAccount: PropTypes.func.isRequired
+  deleteAccount: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
   profile: state.profile
@@ -366,5 +373,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { createProfile, deleteAccount }
+  { createProfile, deleteAccount, getCurrentProfile }
 )(withRouter(Account));

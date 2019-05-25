@@ -31,7 +31,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
               <div className="row">
                 {profiles.length > 0 ? (
                   profiles.map(profile => (
-                    <div className="col-sm-12 col-md-6">
+                    <div key={profile._id} className="col-sm-12 col-md-6">
                       <ProfileItem key={profile._id} profile={profile} />
                     </div>
                   ))

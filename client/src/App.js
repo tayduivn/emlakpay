@@ -11,7 +11,7 @@ import Logout from "./Components/Auth/Logout";
 import Account from "./Components/Account/Account";
 import Me from "./Components/Profile/Me";
 import Profiles from "./Components/Profiles/Profiles";
-
+import Profile from "./Components/Profile/Profile";
 import PrivateRoute from "./Components/Routing/PrivateRoute";
 
 //Redux
@@ -41,6 +41,7 @@ const App = () => {
             <PrivateRoute exact path="/me" component={Me} />
             <PrivateRoute exact path="/account" component={Account} />
             <PrivateRoute exact path="/profiles" component={Profiles} />
+            <PrivateRoute exact path="/profile/:id" component={Profile} />
           </Switch>
           <Footer />
         </div>

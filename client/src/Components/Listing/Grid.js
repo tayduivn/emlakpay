@@ -6,7 +6,7 @@ const Grid = () => {
       <div className="property">
         <a href="property-detail.html">
           <div className="property-image">
-            <img alt="" src="assets/img/properties/property-09.jpg" />
+            <img alt="" src="/assets/img/properties/property-09.jpg" />
           </div>
           <div className="overlay">
             <div className="info">
