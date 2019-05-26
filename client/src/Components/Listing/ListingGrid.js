@@ -1,6 +1,6 @@
 import React from "react";
 
-const Grid = () => {
+const ListingGrid = () => {
   return (
     <div>
       <div className="property">
@@ -41,4 +41,4 @@ const Grid = () => {
   );
 };
 
-export default Grid;
+export default ListingGrid;

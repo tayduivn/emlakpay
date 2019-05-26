@@ -28,6 +28,9 @@ const Navigation = ({ auth: { isAuthenticated, loading }, logout }) => {
         <Link to="/listings">İlanlar</Link>
         <ul className="child-navigation">
           <li>
+            <Link to="/listings">Tüm İlanlar</Link>
+          </li>
+          <li>
             <Link to="properties-listing.html">İlan Ekle</Link>
           </li>
           <li>

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Loading from "../Layout/Loading";
 import { getProfileById } from "../../actions/profile";
-import ListingGrid from "../Listing/Grid";
+import ListingGrid from "../Listing/ListingGrid";
 import SocialNetworks from "./SocialNetworks";
 import { Link } from "react-router-dom";
 
@@ -100,10 +100,8 @@ const Profile = ({ getProfileById, profile: { profile, loading }, match }) => {
                           {profile.company ? profile.company : "-"}
                         </p>
                       </div>
-                      {profile.social ? (
+                      {profile.social && (
                         <SocialNetworks social={profile.social} />
-                      ) : (
-                        <div />
                       )}
                     </div>
                   </section>

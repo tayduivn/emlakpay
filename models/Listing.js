@@ -36,7 +36,8 @@ const ListingSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+  img: { type: Array, default: [] }
 });
 
 module.exports = Listing = mongoose.model("Listing", ListingSchema);

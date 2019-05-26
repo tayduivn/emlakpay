@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
 import { Link } from "react-router-dom";
-import ListingGrid from "../Listing/Grid";
+import ListingGrid from "../Listing/ListingGrid";
 import Loading from "../Layout/Loading";
+import SocialNetworks from "./SocialNetworks";
 
 const Me = ({ getCurrentProfile, profile: { profile, loading } }) => {
   useEffect(() => {
@@ -93,38 +94,8 @@ const Me = ({ getCurrentProfile, profile: { profile, loading } }) => {
                           {profile.company ? profile.company : "-"}
                         </p>
                       </div>
-                      {profile.social ? (
-                        <div className="col-md-4 col-sm-4">
-                          <h3>Sosyal Ağlar</h3>
-                          <div className="agent-social">
-                            {profile.social.twitter ? (
-                              <a
-                                href={profile.social.twitter}
-                                className="fa fa-twitter btn btn-grey-dark"
-                              />
-                            ) : (
-                              ""
-                            )}
-                            {profile.social.facebook ? (
-                              <a
-                                href={profile.social.facebook}
-                                className="fa fa-facebook btn btn-grey-dark"
-                              />
-                            ) : (
-                              ""
-                            )}
-                            {profile.social.linkedin ? (
-                              <a
-                                href={profile.social.linkedin}
-                                className="fa fa-linkedin btn btn-grey-dark"
-                              />
-                            ) : (
-                              ""
-                            )}
-                          </div>
-                        </div>
-                      ) : (
-                        <div />
+                      {profile.social && (
+                        <SocialNetworks social={profile.social} />
                       )}
                     </div>
                   </section>

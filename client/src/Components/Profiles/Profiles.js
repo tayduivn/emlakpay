@@ -5,6 +5,7 @@ import Loading from "../Layout/Loading";
 import { getProfiles } from "../../actions/profile";
 import ProfileItem from "./ProfileItem";
 import { Link } from "react-router-dom";
+import Pagination from "../Layout/Pagination";
 const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   useEffect(() => {
     getProfiles();
@@ -40,25 +41,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
                 )}
               </div>
             </section>
-            <div className="center">
-              <ul className="pagination">
-                <li className="active">
-                  <a href="#">1</a>
-                </li>
-                <li>
-                  <a href="#">2</a>
-                </li>
-                <li>
-                  <a href="#">3</a>
-                </li>
-                <li>
-                  <a href="#">4</a>
-                </li>
-                <li>
-                  <a href="#">5</a>
-                </li>
-              </ul>
-            </div>
+            <Pagination />
           </div>
         </div>
       )}

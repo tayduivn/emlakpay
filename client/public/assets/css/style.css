@@ -4594,7 +4594,8 @@ form label.error:before {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
   background-color: #f3f3f3;
   margin-bottom: 20px;
-  padding: 15px 15px 10px;
+  padding: 15px 5px 10px;
+  width: 100%
 }
 .price-range .jslider-label, .price-range .jslider-value {
   color: #5a5a5a;
