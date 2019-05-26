@@ -15,7 +15,6 @@ const ProfileItem = ({
             </h2>
           </Link>
         </header>
-        <aside>14 İlanlar</aside>
         <dl>
           <dt>Telefon:</dt>
           <dd>{phoneNo}</dd>

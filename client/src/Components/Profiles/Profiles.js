@@ -25,23 +25,27 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
             </ol>
           </div>
           <div className="container">
-            <section id="agents-listing">
-              <header>
-                <h1>Emlakçı Profilleri</h1>
-              </header>
-              <div className="row">
-                {profiles.length > 0 ? (
-                  profiles.map(profile => (
-                    <div key={profile._id} className="col-sm-12 col-md-6">
-                      <ProfileItem key={profile._id} profile={profile} />
-                    </div>
-                  ))
-                ) : (
-                  <h4> No Profiles </h4>
-                )}
+            <div className="row">
+              <div className="col-mg-9 col-sm-9">
+                <section id="agents-listing">
+                  <header>
+                    <h1>Emlakçı Profilleri</h1>
+                  </header>
+                  <div className="row">
+                    {profiles.length > 0 ? (
+                      profiles.map(profile => (
+                        <div key={profile._id} className="col-sm-12 col-md-6">
+                          <ProfileItem key={profile._id} profile={profile} />
+                        </div>
+                      ))
+                    ) : (
+                      <h4> No Profiles </h4>
+                    )}
+                  </div>
+                </section>
+                <Pagination />
               </div>
-            </section>
-            <Pagination />
+            </div>
           </div>
         </div>
       )}
