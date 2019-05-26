@@ -1,5 +1,6 @@
 import React from "react";
 import SimpleSelect from "./SimpleSelect";
+import LocationSelector from "./LocationSelector";
 const SearchListingVertical = () => {
   return (
     <section id="sidebar">
@@ -35,29 +36,81 @@ const SearchListingVertical = () => {
               ]}
             />
           </div>
+          <div className="form-group">
+            <LocationSelector />
+          </div>
 
           <div className="form-group">
             <div>
               <input
-                placeholder="Min Fiyat"
-                id="price-min"
+                placeholder="Fiyat (min)"
                 type="number"
                 name="price-min"
+                style={{ width: "48%", marginRight: "4%" }}
               />
-            </div>
-            <div>
               <input
-                placeholder="Max Fiyat"
-                id="price-max"
+                placeholder="Fiyat (max)"
                 type="number"
                 name="price-max"
+                style={{ width: "48%" }}
+              />
+            </div>
+          </div>
+          <div className="form-group">
+            <div>
+              <input
+                placeholder="Brüt m2 (min)"
+                type="number"
+                name="m2-min"
+                style={{ width: "48%", marginRight: "4%" }}
+              />
+              <input
+                placeholder="Brüt m2 (max)"
+                type="number"
+                name="m2-max"
+                style={{ width: "48%" }}
+              />
+            </div>
+          </div>
+          <div className="form-group">
+            <div>
+              <input
+                placeholder="Oda (min)"
+                type="number"
+                name="m2-min"
+                style={{ width: "48%", marginRight: "4%" }}
+              />
+              <input
+                placeholder="Oda (max)"
+                type="number"
+                name="m2-max"
+                style={{ width: "48%" }}
+              />
+            </div>
+          </div>
+          <div className="form-group">
+            <div>
+              <input
+                placeholder="Salon (min)"
+                type="number"
+                name="m2-min"
+                style={{ width: "48%", marginRight: "4%" }}
+              />
+              <input
+                placeholder="Salon (max)"
+                type="number"
+                name="m2-max"
+                style={{ width: "48%" }}
               />
             </div>
           </div>
           <div className="form-group">
             <button type="submit" className="btn btn-default">
-              Search Now
+              Ara
             </button>
+          </div>
+          <div className="form-group">
+            <button className="btn btn-info">Detaylı Ara</button>
           </div>
         </form>
       </aside>
@@ -68,12 +121,12 @@ const SearchListingVertical = () => {
         </header>
         <a href="#" className="universal-button">
           <figure className="fa fa-home" />
-          <span>Buying Guide</span>
+          <span>Nasıl Çalışır ?</span>
           <span className="arrow fa fa-angle-right" />
         </a>
         <a href="#" className="universal-button">
           <figure className="fa fa-umbrella" />
-          <span>Right Insurance for You</span>
+          <span>S.S.S</span>
           <span className="arrow fa fa-angle-right" />
         </a>
       </aside>

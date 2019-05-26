@@ -1,37 +1,67 @@
 import React from "react";
 
-const ListingGrid = () => {
+const ListingGrid = ({
+  listing: {
+    img,
+    price,
+    title,
+    location,
+    grossm2,
+    netm2,
+    roomCount,
+    loungeCount,
+    bathroomCount,
+    propertyStatus
+  }
+}) => {
   return (
     <div>
       <div className="property">
         <a href="property-detail.html">
+          <figure class="tag status">
+            {propertyStatus === "Satılık" ? "Satılık" : "Kiralık"}
+          </figure>
           <div className="property-image">
-            <img alt="" src="/assets/img/properties/property-09.jpg" />
+            <img
+              alt=""
+              src={img[0] ? img[0] : "/assets/img/properties/property-09.jpg"}
+            />
           </div>
           <div className="overlay">
             <div className="info">
-              <div className="tag price">$ 11,000</div>
-              <h3>3398 Lodgeville Road</h3>
-              <figure>Golden Valley, MN 55427</figure>
+              <div className="tag price">{price} ₺</div>
+              <h3>{title}</h3>
+              <figure>
+                {location.neighborhood} - {location.district} -{" "}
+                {location.province}
+              </figure>
             </div>
             <ul className="additional-info">
               <li>
-                <header>Area:</header>
+                <header>Brüt:</header>
                 <figure>
-                  240m<sup>2</sup>
+                  {grossm2}
+                  <sup>2</sup>
                 </figure>
               </li>
               <li>
-                <header>Beds:</header>
-                <figure>2</figure>
+                <header>Net:</header>
+                <figure>
+                  {netm2}
+                  <sup>2</sup>
+                </figure>
               </li>
               <li>
-                <header>Baths:</header>
-                <figure>2</figure>
+                <header>Oda:</header>
+                <figure>{roomCount}</figure>
               </li>
               <li>
-                <header>Garages:</header>
-                <figure>0</figure>
+                <header>Salon:</header>
+                <figure>{loungeCount}</figure>
+              </li>
+              <li>
+                <header>Banyo:</header>
+                <figure>{bathroomCount}</figure>
               </li>
             </ul>
           </div>

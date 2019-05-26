@@ -4,13 +4,21 @@ import { connect } from "react-redux";
 import Loading from "../Layout/Loading";
 import { getProfileById } from "../../actions/profile";
 import ListingGrid from "../Listing/ListingGrid";
+import { getListings } from "../../actions/listing";
 import SocialNetworks from "./SocialNetworks";
 import { Link } from "react-router-dom";
 
-const Profile = ({ getProfileById, profile: { profile, loading }, match }) => {
+const Profile = ({
+  getProfileById,
+  profile: { profile, loading },
+  match,
+  listing: { listings },
+  getListings
+}) => {
   useEffect(() => {
     getProfileById(match.params.id);
-  }, [getProfileById, match.params.id]);
+    getListings();
+  }, [getProfileById, match.params.id, getListings]);
 
   return (
     <Fragment>
@@ -112,31 +120,23 @@ const Profile = ({ getProfileById, profile: { profile, loading }, match }) => {
                     </header>
                     <div className="layout-expandable">
                       <div className="row">
-                        <div className="col-md-3 col-sm-3">
-                          <ListingGrid />
-                        </div>
-                        <div className="col-md-3 col-sm-3">
-                          <ListingGrid />
-                        </div>
-                        <div className="col-md-3 col-sm-3">
-                          <ListingGrid />
-                        </div>
-                        <div className="col-md-3 col-sm-3">
-                          <ListingGrid />
-                        </div>
-
-                        <div className="col-md-3 col-sm-3">
-                          <ListingGrid />
-                        </div>
-                        <div className="col-md-3 col-sm-3">
-                          <ListingGrid />
-                        </div>
-                        <div className="col-md-3 col-sm-3">
-                          <ListingGrid />
-                        </div>
-                        <div className="col-md-3 col-sm-3">
-                          <ListingGrid />
-                        </div>
+                        {listings.length > 0 ? (
+                          listings.map(listing => (
+                            <div
+                              className="col-md-3 col-sm-3"
+                              key={listing._id}
+                            >
+                              <ListingGrid
+                                listing={listing}
+                                key={listing._id}
+                              />
+                            </div>
+                          ))
+                        ) : (
+                          <div className="col-md-12">
+                            <h4> İlan Bulunamadı </h4>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </section>
@@ -152,12 +152,14 @@ const Profile = ({ getProfileById, profile: { profile, loading }, match }) => {
 
 Profile.propTypes = {
   getProfileById: PropTypes.func.isRequired,
+  getListings: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
-  profile: state.profile
+  profile: state.profile,
+  listing: state.listing
 });
 export default connect(
   mapStateToProps,
-  { getProfileById }
+  { getProfileById, getListings }
 )(Profile);

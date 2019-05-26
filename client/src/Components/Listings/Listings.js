@@ -53,17 +53,16 @@ const Listings = ({ getListings, listing: { listings, loading } }) => {
               </section>
               <section id="properties">
                 <div className="row">
-                  <div className="col-md-4 col-sm-4">
-                    <ListingGrid />
-                  </div>
-                  <div className="col-md-4 col-sm-4">
-                    <ListingGrid />
-                  </div>
-                  <div className="col-md-4 col-sm-4">
-                    <ListingGrid />
-                  </div>
+                  {listings.length > 0 ? (
+                    listings.map(listing => (
+                      <div className="col-md-4 col-sm-4" key={listing._id}>
+                        <ListingGrid listing={listing} key={listing._id} />
+                      </div>
+                    ))
+                  ) : (
+                    <h4> İlan Bulunamadı </h4>
+                  )}
                 </div>
-
                 <section id="advertising">
                   <a href="submit.html">
                     <div className="banner">

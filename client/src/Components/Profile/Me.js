@@ -6,15 +6,22 @@ import { Link } from "react-router-dom";
 import ListingGrid from "../Listing/ListingGrid";
 import Loading from "../Layout/Loading";
 import SocialNetworks from "./SocialNetworks";
+import { getListings } from "../../actions/listing";
 
-const Me = ({ getCurrentProfile, profile: { profile, loading } }) => {
+const Me = ({
+  getCurrentProfile,
+  profile: { profile, loading },
+  listing: { listings },
+  getListings
+}) => {
   useEffect(() => {
+    getListings();
     getCurrentProfile();
-  }, [getCurrentProfile]);
+  }, [getCurrentProfile, getListings]);
 
   return (
-    <Fragment>
-      {loading && profile == null ? (
+    <div>
+      {loading ? (
         <Loading />
       ) : (
         <div id="page-content">
@@ -106,31 +113,23 @@ const Me = ({ getCurrentProfile, profile: { profile, loading } }) => {
                     </header>
                     <div className="layout-expandable">
                       <div className="row">
-                        <div className="col-md-3 col-sm-3">
-                          <ListingGrid />
-                        </div>
-                        <div className="col-md-3 col-sm-3">
-                          <ListingGrid />
-                        </div>
-                        <div className="col-md-3 col-sm-3">
-                          <ListingGrid />
-                        </div>
-                        <div className="col-md-3 col-sm-3">
-                          <ListingGrid />
-                        </div>
-
-                        <div className="col-md-3 col-sm-3">
-                          <ListingGrid />
-                        </div>
-                        <div className="col-md-3 col-sm-3">
-                          <ListingGrid />
-                        </div>
-                        <div className="col-md-3 col-sm-3">
-                          <ListingGrid />
-                        </div>
-                        <div className="col-md-3 col-sm-3">
-                          <ListingGrid />
-                        </div>
+                        {listings.length > 0 ? (
+                          listings.map(listing => (
+                            <div
+                              className="col-md-3 col-sm-3"
+                              key={listing._id}
+                            >
+                              <ListingGrid
+                                listing={listing}
+                                key={listing._id}
+                              />
+                            </div>
+                          ))
+                        ) : (
+                          <div className="col-md-12">
+                            <h4> İlan Bulunamadı </h4>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </section>
@@ -140,19 +139,21 @@ const Me = ({ getCurrentProfile, profile: { profile, loading } }) => {
           </div>
         </div>
       )}
-    </Fragment>
+    </div>
   );
 };
 
 Me.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
+  getListings: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
-  profile: state.profile
+  profile: state.profile,
+  listing: state.listing
 });
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile }
+  { getCurrentProfile, getListings }
 )(Me);
