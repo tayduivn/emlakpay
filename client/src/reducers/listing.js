@@ -1,4 +1,9 @@
-import { GET_LISTINGS, LISTING_ERROR } from "../actions/types";
+import {
+  GET_LISTINGS,
+  LISTING_ERROR,
+  GET_LISTING,
+  TOOGLE_FAVS
+} from "../actions/types";
 
 const initialState = {
   listings: [],
@@ -21,6 +26,13 @@ export default function(state = initialState, action) {
       return {
         ...state,
         error: payload,
+        loading: false
+      };
+    case GET_LISTING:
+    case TOOGLE_FAVS:
+      return {
+        ...state,
+        listing: payload,
         loading: false
       };
     default:

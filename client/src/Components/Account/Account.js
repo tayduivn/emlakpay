@@ -31,25 +31,24 @@ const Account = ({
 
   useEffect(() => {
     getCurrentProfile();
-    if (profile) {
-      setFormData({
-        name: loading || !profile.name ? "" : profile.name,
-        surname: loading || !profile.surname ? "" : profile.surname,
-        company: loading || !profile.company ? "" : profile.company,
-        bio: loading || !profile.bio ? "" : profile.bio,
-        phoneNo: loading || !profile.phoneNo ? "" : profile.phoneNo,
-        email: loading || !profile.email ? "" : profile.email,
-        city: loading || !profile.city ? "" : profile.city,
-        avatar:
-          loading || !profile.avatar
-            ? "/assets/img/member-01.jpg"
-            : profile.avatar,
-        linkedin: loading || !profile.social ? "" : profile.social.linkedin,
-        facebook: loading || !profile.social ? "" : profile.social.facebook,
-        twitter: loading || !profile.social ? "" : profile.social.twitter
-      });
-    }
-  }, [profile, loading, getCurrentProfile]);
+
+    setFormData({
+      name: loading || (profile && !profile.name) ? "" : profile.name,
+      surname: loading || (profile && !profile.surname) ? "" : profile.surname,
+      company: loading || (profile && !profile.company) ? "" : profile.company,
+      bio: loading || (profile && !profile.bio) ? "" : profile.bio,
+      phoneNo: loading || (profile && !profile.phoneNo) ? "" : profile.phoneNo,
+      email: loading || (profile && !profile.email) ? "" : profile.email,
+      city: loading || (profile && !profile.city) ? "" : profile.city,
+      avatar:
+        loading || !profile.avatar
+          ? "/assets/img/member-01.jpg"
+          : profile.avatar,
+      linkedin: loading || !profile.social ? "" : profile.social.linkedin,
+      facebook: loading || !profile.social ? "" : profile.social.facebook,
+      twitter: loading || !profile.social ? "" : profile.social.twitter
+    });
+  }, [loading, getCurrentProfile]);
 
   const {
     name,

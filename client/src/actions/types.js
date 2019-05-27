@@ -13,4 +13,6 @@ export const PROFILE_ERROR = "PROFILE_ERROR";
 export const CLEAR_PROFILE = "CLEAR_PROFILE";
 export const ACCOUNT_DELETED = "ACCOUNT_DELETED";
 export const GET_LISTINGS = "GET_LISTINGS";
+export const GET_LISTING = "GET_LISTING";
 export const LISTING_ERROR = "LISTING_ERROR";
+export const TOOGLE_FAVS = "TOOGLE_FAVS";

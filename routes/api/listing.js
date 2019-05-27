@@ -313,12 +313,12 @@ router.put("/fav/:id", auth, async (req, res) => {
     if (favIndex !== -1) {
       listing.favedBy.splice(favIndex, 1);
       await listing.save();
-      return res.json(listing.favedBy);
+      return res.json(listing);
     }
 
     listing.favedBy.push(req.user.id);
     await listing.save();
-    res.json(listing.favedBy);
+    res.json(listing);
   } catch (err) {
     console.log(err.message);
     if (err.kind === "ObjectId") {

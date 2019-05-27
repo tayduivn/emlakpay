@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getListings } from "../../actions/listing";
 import Loading from "../Layout/Loading";
-import ListingGrid from "../Listing/ListingGrid";
+import ListingItem from "./ListingItem";
 import SimpleSelect from "react-select";
 import SearchListingVertical from "../Layout/SearchListingVertical";
 
@@ -56,7 +56,7 @@ const Listings = ({ getListings, listing: { listings, loading } }) => {
                   {listings.length > 0 ? (
                     listings.map(listing => (
                       <div className="col-md-4 col-sm-4" key={listing._id}>
-                        <ListingGrid listing={listing} key={listing._id} />
+                        <ListingItem listing={listing} key={listing._id} />
                       </div>
                     ))
                   ) : (

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Loading from "../Layout/Loading";
 import { getProfileById } from "../../actions/profile";
-import ListingGrid from "../Listing/ListingGrid";
+import ListingItem from "../Listings/ListingItem";
 import { getListings } from "../../actions/listing";
 import SocialNetworks from "./SocialNetworks";
 import { Link } from "react-router-dom";
@@ -126,7 +126,7 @@ const Profile = ({
                               className="col-md-3 col-sm-3"
                               key={listing._id}
                             >
-                              <ListingGrid
+                              <ListingItem
                                 listing={listing}
                                 key={listing._id}
                               />

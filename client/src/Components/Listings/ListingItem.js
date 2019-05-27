@@ -1,6 +1,6 @@
 import React from "react";
-
-const ListingGrid = ({
+import { Link } from "react-router-dom";
+const ListingItem = ({
   listing: {
     img,
     price,
@@ -11,22 +11,25 @@ const ListingGrid = ({
     roomCount,
     loungeCount,
     bathroomCount,
-    propertyStatus
+    propertyStatus,
+    _id
   }
 }) => {
   return (
     <div>
-      <div className="property">
-        <a href="property-detail.html">
-          <figure class="tag status">
+      <Link to={`/listing/${_id}`}>
+        <div className="property">
+          <figure className="tag status">
             {propertyStatus === "Satılık" ? "Satılık" : "Kiralık"}
           </figure>
+
           <div className="property-image">
             <img
               alt=""
               src={img[0] ? img[0] : "/assets/img/properties/property-09.jpg"}
             />
           </div>
+
           <div className="overlay">
             <div className="info">
               <div className="tag price">{price} ₺</div>
@@ -65,10 +68,10 @@ const ListingGrid = ({
               </li>
             </ul>
           </div>
-        </a>
-      </div>
+        </div>
+      </Link>
     </div>
   );
 };
 
-export default ListingGrid;
+export default ListingItem;

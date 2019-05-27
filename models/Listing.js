@@ -33,10 +33,6 @@ const ListingSchema = new mongoose.Schema({
   swap: { type: Boolean, required: true },
   side: { type: String }, //Batı Doğu Güney Kuzey
   favedBy: { type: Array, default: [] },
-  date: {
-    type: Date,
-    default: Date.now
-  },
   img: { type: Array, default: [] }
 });
 

@@ -14,7 +14,7 @@ import Profiles from "./Components/Profiles/Profiles";
 import Profile from "./Components/Profile/Profile";
 import PrivateRoute from "./Components/Routing/PrivateRoute";
 import Listings from "./Components/Listings/Listings";
-
+import Listing from "./Components/Listing/Listing";
 //Redux
 import { Provider } from "react-redux";
 import store from "./store";
@@ -44,6 +44,7 @@ const App = () => {
             <PrivateRoute exact path="/profiles" component={Profiles} />
             <PrivateRoute exact path="/profile/:id" component={Profile} />
             <PrivateRoute exact path="/listings" component={Listings} />
+            <PrivateRoute exact path="/listing/:id" component={Listing} />
           </Switch>
           <Footer />
         </div>
