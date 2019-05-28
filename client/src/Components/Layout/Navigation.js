@@ -21,7 +21,7 @@ const Navigation = ({ auth: { isAuthenticated, loading }, logout }) => {
   );
   const authMidLinks = (
     <ul className="nav navbar-nav">
-      <li className="active">
+      <li>
         <Link to="/">Anasayfa</Link>
       </li>
       <li className="has-child">
@@ -129,7 +129,7 @@ const Navigation = ({ auth: { isAuthenticated, loading }, logout }) => {
             )}
           </nav>
           <div className="add-your-property">
-            <Link to="new-listing" className="btn btn-default">
+            <Link to="/new-listing" className="btn btn-default">
               <i className="fa fa-plus" />
               <span className="text">İlan Ekleyin</span>
             </Link>
