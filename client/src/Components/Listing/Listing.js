@@ -6,14 +6,15 @@ import { favListing } from "../../actions/listing";
 import { loadUser } from "../../actions/auth";
 import Loading from "../Layout/Loading";
 import { Link } from "react-router-dom";
-
+import ImageGallery from "../Layout/ImageGallery";
 const Listing = ({
   getListingById,
   favListing,
   loadUser,
   listing: { listing, loading },
   match,
-  auth
+  auth,
+  profile: { profile }
 }) => {
   useEffect(() => {
     getListingById(match.params.id);
@@ -58,13 +59,16 @@ const Listing = ({
             <li>
               <Link to="/"> Anasayfa </Link>
             </li>
+            <li>
+              <Link to="/listings"> İlanlar </Link>
+            </li>
             <li className="active">{title}</li>
           </ol>
         </div>
         <div className="container">
-          <div className="row">
-            <div className="col-md-9 col-sm-9">
-              <section id="property-detail">
+          <section id="property-detail">
+            <div className="row">
+              <div className="col-md-9 col-sm-12">
                 <header className="property-title">
                   <h1>{title}</h1>
                   <figure>
@@ -81,121 +85,132 @@ const Listing = ({
                           ? "bookmark bookmark-added"
                           : "bookmark"
                       }
-                      onClick={() => favListing(_id)}
+                      onClick={e => favListing(e, _id)}
                     >
                       <span className="title-add">Favorilere Ekle</span>
                       <span className="title-added">Eklendi</span>
                     </a>
                   </span>
                 </header>
-                <section id="property-gallery" />
-                <div className="row">
-                  <div className="col-md-12 col-sm-12">
-                    <section id="description">
-                      {brief ? (
-                        <div>
-                          <header>
-                            <h2>İlan Açıklaması</h2>
-                          </header>
-                          <p>{brief}</p>
+
+                <section id="property-gallery">
+                  {img && img.length > 0 ? <ImageGallery imgArray={img} /> : ""}
+                </section>
+              </div>
+              <div className="col-md-3 col-sm-12">
+                <section id="quick-summary" className="clearfix">
+                  <header>
+                    <h2>Gayrimenkul Bilgileri</h2>
+                  </header>
+                  <dl>
+                    <dt>Adres</dt>
+                    <dd>
+                      {location.neighborhood}, {location.district},{" "}
+                      {location.province}
+                    </dd>
+                    <dt>Fiyat</dt>
+                    <dd>
+                      <span className="tag price">{price} TL</span>
+                    </dd>
+                    <dt>Emlak Tipi:</dt>
+                    <dd>
+                      {propertyStatus} {propertyType}
+                    </dd>
+                    <dt>Brüt m2:</dt>
+                    <dd>
+                      {grossm2} m<sup>2</sup>
+                    </dd>
+                    <dt>Net m2:</dt>
+                    <dd>
+                      {netm2} m<sup>2</sup>
+                    </dd>
+                    <dt>Oda:</dt>
+                    <dd>{roomCount}</dd>
+                    <dt>Salon:</dt>
+                    <dd>{loungeCount}</dd>
+                    <dt>Banyo:</dt>
+                    <dd>{bathroomCount}</dd>
+                    <dt>Yaş:</dt>
+                    <dd>{age}</dd>
+                    <dt>Bulunduğu Kat:</dt>
+                    <dd>{floor}</dd>
+                    <dt>Kat Sayısı:</dt>
+                    <dd>{totalFloor}</dd>
+                    <dt>Isınma:</dt>
+                    <dd>{heating}</dd>
+                    <dt>Balkon:</dt>
+                    <dd>{balcony ? "Var" : "Yok"}</dd>
+                    <dt>Mobilyalı:</dt>
+                    <dd>{furnished ? "Evet" : "Hayır"}</dd>
+                    <dt>Site İçerisinde:</dt>
+                    <dd>{inSite ? "Evet" : "Hayır"}</dd>
+                    <dt>Kullanım Durumu:</dt>
+                    <dd>{usageStatus}</dd>
+                    <dt>Aidat:</dt>
+                    <dd>{dues}</dd>
+                    <dt>Takas:</dt>
+                    <dd>{swap ? "Evet" : "Hayır"}</dd>
+                    {side ? (
+                      <Fragment>
+                        <dt>Cephe:</dt>
+                        <dd>{side}</dd>
+                      </Fragment>
+                    ) : (
+                      ""
+                    )}
+                  </dl>
+                </section>
+              </div>
+
+              <div className="col-md-9 col-sm-12">
+                <section id="contact-agent">
+                  <header>
+                    <h2>Portföy Sahibi</h2>
+                  </header>
+
+                  {profile ? (
+                    <section className="agent-form">
+                      <aside className="agent-info clearfix">
+                        <figure>
+                          <a href="agent-detail.html">
+                            <img alt="" src={profile.avatar} />
+                          </a>
+                        </figure>
+                        <div className="agent-contact-info">
+                          <h3>
+                            {profile.name} {profile.surname}
+                          </h3>
+                          <p>{profile.bio}</p>
+                          <dl>
+                            <dt>Telefon No:</dt>
+                            <dd>{profile.phoneNo}</dd>
+                            <dt>Mobile:</dt>
+                            <dd>888 123 456 789</dd>
+                            <dt>Email:</dt>
+                            <dd>{profile.email}</dd>
+                            <dt>Emlak Ofisi:</dt>
+                            <dd>{profile.company}</dd>
+                          </dl>
+                          <hr />
+                          <Link
+                            to={`/profile/${listing.user}`}
+                            className="link-arrow"
+                          >
+                            Profili Gör
+                          </Link>
                         </div>
-                      ) : (
-                        <p />
-                      )}
+                      </aside>
                     </section>
-                    <section id="property-features">
-                      <header>
-                        <h2>Property Description</h2>
-                      </header>
-                      <ul className="list-unstyled property-features-list">
-                        <li>Sauna</li>
-                        <li>Fireplace or fire pit</li>
-                        <li>Outdoor Kitchen</li>
-                        <li>Tennis Courts</li>
-                        <li>Trees and Landscaping</li>
-                        <li>Sun Room</li>
-                        <li>Family Room</li>
-                        <li>Concrete Flooring</li>
-                      </ul>
+                  ) : (
+                    <section className="agent-form">
+                      <h3>Bu portföyün sahibi henüz bir profil eklemedi.</h3>
                     </section>
-                  </div>
-                  <div className="col-md-12 col-sm-12">
-                    <section id="contact-agent">
-                      <header>
-                        <h2>Contact Agent</h2>
-                      </header>
-
-                      <section className="agent-form">
-                        <aside className="agent-info clearfix">
-                          <figure>
-                            <a href="agent-detail.html">
-                              <img alt="" src="/assets/img/agent-01.jpg" />
-                            </a>
-                          </figure>
-                          <div className="agent-contact-info">
-                            <h3>Robert Farley</h3>
-                            <p>
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit. Cras et dui vestibulum, bibendum purus sit
-                              amet, vulputate mauris. Ut adipiscing gravida
-                              tincidunt. Duis euismod placerat rhoncus.
-                            </p>
-                            <dl>
-                              <dt>Phone:</dt>
-                              <dd>(123) 456 789</dd>
-                              <dt>Mobile:</dt>
-                              <dd>888 123 456 789</dd>
-                              <dt>Email:</dt>
-                              <dd>
-                                <a href="mailto:#">john.doe@example.com</a>
-                              </dd>
-                              <dt>Skype:</dt>
-                              <dd>john.doe</dd>
-                            </dl>
-                            <hr />
-                            <a href="agent-detail.html" className="link-arrow">
-                              Full Profile
-                            </a>
-                          </div>
-                        </aside>
-                      </section>
-                    </section>
-                    <hr className="thick" />
-                  </div>
-                </div>
-              </section>
+                  )}
+                </section>
+                <hr className="thick" />
+              </div>
             </div>
-
-            <div className="col-md-3 col-sm-12">
-              <section id="quick-summary" className="clearfix">
-                <header>
-                  <h2>Quick Summary</h2>
-                </header>
-                <dl>
-                  <dt>Location</dt>
-                  <dd>Chicago, IL 60610</dd>
-                  <dt>Price</dt>
-                  <dd>
-                    <span className="tag price">$78,000</span>
-                  </dd>
-                  <dt>Property Type:</dt>
-                  <dd>House</dd>
-                  <dt>Status:</dt>
-                  <dd>Sale</dd>
-                  <dt>Area:</dt>
-                  <dd>
-                    860 m<sup>2</sup>
-                  </dd>
-                  <dt>Beds:</dt>
-                  <dd>3</dd>
-                  <dt>Baths:</dt>
-                  <dd>2</dd>
-                  <dt>Garages:</dt>
-                  <dd>2</dd>
-                </dl>
-              </section>
-            </div>
-          </div>
+          </section>
         </div>
       </div>
     );
@@ -209,12 +224,14 @@ Listing.propTypes = {
   favListing: PropTypes.func.isRequired,
   loadUser: PropTypes.func.isRequired,
   listing: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   listing: state.listing,
-  auth: state.auth
+  auth: state.auth,
+  profile: state.profile
 });
 
 export default connect(

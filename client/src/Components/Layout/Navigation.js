@@ -25,7 +25,7 @@ const Navigation = ({ auth: { isAuthenticated, loading }, logout }) => {
         <Link to="/">Anasayfa</Link>
       </li>
       <li className="has-child">
-        <Link to="/listings">İlanlar</Link>
+        <Link to="#">İlanlar</Link>
         <ul className="child-navigation">
           <li>
             <Link to="/listings">Tüm İlanlar</Link>
@@ -42,7 +42,7 @@ const Navigation = ({ auth: { isAuthenticated, loading }, logout }) => {
         </ul>
       </li>
       <li className="has-child">
-        <Link to="/profiles">Profiller</Link>
+        <Link to="#">Profiller</Link>
         <ul className="child-navigation">
           <li>
             <Link to="/profiles">Tüm Profiller</Link>

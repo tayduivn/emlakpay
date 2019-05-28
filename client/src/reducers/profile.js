@@ -30,13 +30,14 @@ export default function(state = initialState, action) {
     case PROFILE_ERROR:
       return {
         ...state,
+        profile: null,
         error: payload,
         loading: false
       };
     case CLEAR_PROFILE:
       return {
         ...state,
-        profile: null,
+        profile: {},
         loading: false,
         profiles: []
       };

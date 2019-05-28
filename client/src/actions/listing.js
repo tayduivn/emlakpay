@@ -1,7 +1,12 @@
 import axios from "axios";
 import { setAlert } from "./alert";
-import { GET_LISTINGS, LISTING_ERROR, GET_LISTING, TOOGLE_FAVS } from "./types";
-
+import {
+  GET_LISTINGS,
+  LISTING_ERROR,
+  GET_LISTING,
+  TOOGLE_FAVS,
+  GET_PROFILE
+} from "./types";
 export const getListings = () => async dispatch => {
   try {
     const res = await axios.get("/api/listing");
@@ -22,7 +27,11 @@ export const getListingById = listingId => async dispatch => {
     const res = await axios.get(`/api/listing/${listingId}`);
     dispatch({
       type: GET_LISTING,
-      payload: res.data
+      payload: res.data.listing
+    });
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data.profile
     });
   } catch (err) {
     dispatch({
@@ -33,7 +42,8 @@ export const getListingById = listingId => async dispatch => {
 };
 
 //Get profile by id
-export const favListing = listingId => async dispatch => {
+export const favListing = (e, listingId) => async dispatch => {
+  e.preventDefault();
   try {
     const res = await axios.put(`/api/listing/fav/${listingId}`);
     dispatch({

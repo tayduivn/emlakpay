@@ -265,10 +265,11 @@ router.get("/", auth, async (req, res) => {
 router.get("/:id", auth, async (req, res) => {
   try {
     const listing = await Listing.findById(req.params.id);
+    const profile = await Profile.findOne({ user: listing.user });
     if (!listing) {
       return res.status(404).json({ msg: "İlan bulunamadı" });
     }
-    res.json(listing);
+    res.json({ listing: listing, profile: profile });
   } catch (err) {
     console.log(err.message);
     if (err.kind === "ObjectId") {
