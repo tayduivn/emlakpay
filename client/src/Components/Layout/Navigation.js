@@ -31,7 +31,7 @@ const Navigation = ({ auth: { isAuthenticated, loading }, logout }) => {
             <Link to="/listings">Tüm İlanlar</Link>
           </li>
           <li>
-            <Link to="properties-listing.html">İlan Ekle</Link>
+            <Link to="/new-listing">İlan Ekle</Link>
           </li>
           <li>
             <Link to="properties-listing-grid.html">İlanlarım</Link>
@@ -129,7 +129,7 @@ const Navigation = ({ auth: { isAuthenticated, loading }, logout }) => {
             )}
           </nav>
           <div className="add-your-property">
-            <Link to="submit.html" className="btn btn-default">
+            <Link to="new-listing" className="btn btn-default">
               <i className="fa fa-plus" />
               <span className="text">İlan Ekleyin</span>
             </Link>

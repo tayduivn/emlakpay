@@ -5,7 +5,8 @@ import {
   LISTING_ERROR,
   GET_LISTING,
   TOOGLE_FAVS,
-  GET_PROFILE
+  GET_PROFILE,
+  ADD_LISTING
 } from "./types";
 export const getListings = () => async dispatch => {
   try {
@@ -42,14 +43,37 @@ export const getListingById = listingId => async dispatch => {
 };
 
 //Get profile by id
-export const favListing = (e, listingId) => async dispatch => {
-  e.preventDefault();
+export const favListing = listingId => async dispatch => {
   try {
     const res = await axios.put(`/api/listing/fav/${listingId}`);
     dispatch({
       type: TOOGLE_FAVS,
       payload: res.data
     });
+  } catch (err) {
+    dispatch({
+      type: LISTING_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+//add listing
+export const addListing = formData => async dispatch => {
+  const config = {
+    header: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  try {
+    const res = await axios.post("/api/post", formData, config);
+    dispatch({
+      type: ADD_LISTING,
+      payload: res.data
+    });
+
+    dispatch(setAlert("İlan Eklendi", "success"));
   } catch (err) {
     dispatch({
       type: LISTING_ERROR,

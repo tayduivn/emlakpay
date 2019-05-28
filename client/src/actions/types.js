@@ -16,3 +16,4 @@ export const GET_LISTINGS = "GET_LISTINGS";
 export const GET_LISTING = "GET_LISTING";
 export const LISTING_ERROR = "LISTING_ERROR";
 export const TOOGLE_FAVS = "TOOGLE_FAVS";
+export const ADD_LISTING = "ADD_LISTING";

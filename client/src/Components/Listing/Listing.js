@@ -85,7 +85,10 @@ const Listing = ({
                           ? "bookmark bookmark-added"
                           : "bookmark"
                       }
-                      onClick={e => favListing(e, _id)}
+                      onClick={e => {
+                        e.preventDefault();
+                        favListing(_id);
+                      }}
                     >
                       <span className="title-add">Favorilere Ekle</span>
                       <span className="title-added">Eklendi</span>
