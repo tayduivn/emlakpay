@@ -21,7 +21,7 @@ const ListingSchema = new mongoose.Schema({
   roomCount: { type: Number, required: true },
   loungeCount: { type: Number, required: true },
   bathroomCount: { type: Number, required: true },
-  age: { type: String, required: true }, //0, 1-5, 5-10, 10-15, 15-20, 20-25, 25-30, 31+
+  age: { type: Number, required: true },
   floor: { type: Number, required: true },
   totalFloor: { type: Number, required: true },
   heating: { type: String, required: true }, //Yok "Soba" "Doğalgaz Sobası" "Kat Kaloriferi" "Merkezi" "Merkezi (Pay Ölçer)" "Doğalgaz (Kombi)" "Yerden Isıtma" Klima" Fancoil Ünitesi" "Güneş Enerjisi" Jeotermal Şömine VRV "Isı Pompası"

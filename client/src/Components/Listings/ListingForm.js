@@ -2,15 +2,18 @@ import React, { useState, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addListing } from "../../actions/listing";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import SimpleSelect from "../Layout/SimpleSelect";
 import LocationSelector from "../Layout/LocationSelector";
+import MultipleImageUploader from "../Layout/MultipleImageUploader";
 
-const ListingForm = ({ addListing }) => {
+const ListingForm = ({ addListing, history }) => {
   const [formData, setFormData] = useState({
     title: "",
     brief: "",
-    location: {},
+    district: "Izmir",
+    province: "Urla",
+    neighborhood: "Fevzi",
     price: "",
     propertyType: "",
     propertyStatus: "",
@@ -29,7 +32,8 @@ const ListingForm = ({ addListing }) => {
     usageStatus: "",
     dues: "",
     swap: "",
-    side: ""
+    side: null,
+    img: []
   });
 
   const {
@@ -54,15 +58,24 @@ const ListingForm = ({ addListing }) => {
     usageStatus,
     dues,
     swap,
-    side
+    img
   } = formData;
 
-  const onChange = e =>
+  const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const setImages = images => {
+    setFormData({ ...formData, img: images });
+  };
+
+  const setSelect = (e, name) => {
+    setFormData({ ...formData, [name]: e.value });
+  };
 
   const onSubmit = e => {
     e.preventDefault();
-    addListing(formData);
+    addListing(formData, history);
   };
 
   return (
@@ -89,148 +102,328 @@ const ListingForm = ({ addListing }) => {
           <form
             id="form-submit"
             className="form-submit"
-            action="thank-you.html"
+            onSubmit={e => onSubmit(e)}
           >
             <div className="row">
               <div className="block">
                 <section id="submit-form">
-                  <div className="col-md-9">
+                  <div className="col-md-9 col-sm-12">
                     <section id="basic-information">
-                      <header>
-                        <h2>Basic Information</h2>
-                      </header>
                       <div className="row">
                         <div className="col-md-8">
                           <div className="form-group">
-                            <label htmlFor="submit-title">Title</label>
+                            <label htmlFor="submit-title">İlan Başlığı</label>
                             <input
                               type="text"
                               className="form-control"
                               id="submit-title"
                               name="title"
-                              required
+                              value={title}
+                              onChange={e => onChange(e)}
                             />
                           </div>
                         </div>
                         <div className="col-md-4">
                           <div className="form-group">
-                            <label htmlFor="submit-price">Price</label>
+                            <label htmlFor="submit-price">Fiyat</label>
                             <div className="input-group">
-                              <span className="input-group-addon">$</span>
+                              <span className="input-group-addon">₺</span>
                               <input
                                 type="text"
                                 className="form-control"
                                 id="submit-price"
                                 name="price"
-                                pattern="\d*"
-                                required
+                                onChange={e => onChange(e)}
                               />
                             </div>
                           </div>
                         </div>
                       </div>
                       <div className="form-group">
-                        <label htmlFor="submit-description">Description</label>
+                        <label htmlFor="submit-description">Açıklama</label>
                         <textarea
                           className="form-control"
                           id="submit-description"
                           rows="8"
-                          name="submit-description"
-                          required
+                          name="brief"
+                          onChange={e => onChange(e)}
                         />
+                      </div>
+                      <div className="col-md-12 col-sm-12">
+                        <MultipleImageUploader setImages={setImages} />
                       </div>
                     </section>
                   </div>
 
-                  <div className="col-md-3">
+                  <div className="col-md-3 col-sm-12">
                     <section id="summary">
-                      <header>
-                        <h2>Summary</h2>
-                      </header>
-
                       <div className="row">
-                        <LocationSelector />
-                        <div className="col-md-6 col-sm-6">
-                          <div className="form-group">
-                            <label htmlFor="submit-property-type">
-                              Property Type
-                            </label>
-                            <select name="type" id="submit-property-type">
-                              <option value="1">Apartment</option>
-                              <option value="2">Condominium</option>
-                              <option value="3">Cottage</option>
-                              <option value="4">Flat</option>
-                              <option value="5">House</option>
-                            </select>
-                          </div>
+                        <div className="col-md-12 col-sm-12">
+                          <LocationSelector />
                         </div>
                         <div className="col-md-6 col-sm-6">
                           <div className="form-group">
-                            <label htmlFor="submit-status">Status</label>
-                            <select name="type" id="submit-status">
-                              <option value="1">Sale</option>
-                              <option value="2">Rent</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-md-6 col-sm-6">
-                          <div className="form-group">
-                            <label htmlFor="submit-Beds">Beds</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              id="submit-Beds"
-                              name="Beds"
-                              pattern="\d*"
-                              required
+                            <SimpleSelect
+                              placeholder="İlan Tipi"
+                              setSelect={(e, name) => setSelect(e, name)}
+                              options={[
+                                { value: "Satılık", label: "Satılık" },
+                                { value: "Kiralık", label: "Kiralık" }
+                              ]}
+                              name="propertyStatus"
                             />
                           </div>
                         </div>
                         <div className="col-md-6 col-sm-6">
                           <div className="form-group">
-                            <label htmlFor="submit-Baths">Baths</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              id="submit-Baths"
-                              name="Baths"
-                              pattern="\d*"
-                              required
+                            <SimpleSelect
+                              placeholder="Emlak Tipi"
+                              setSelect={(e, name) => setSelect(e, name)}
+                              options={[
+                                { value: "Konut", label: "Konut" },
+                                { value: "İşyeri", label: "İşyeri" },
+                                { value: "Arsa", label: "Arsa" },
+                                { value: "Bina", label: "Bina" },
+                                {
+                                  value: "Turistik Tesis",
+                                  label: "Turistik Tesis"
+                                },
+                                { value: "Devremülk", label: "Devremülk" }
+                              ]}
+                              name="propertyType"
                             />
                           </div>
                         </div>
-                      </div>
-                      <div className="row">
-                        <div className="col-md-6 col-sm-6">
+                        <div className="col-md-12 col-sm-12">
                           <div className="form-group">
-                            <label htmlFor="submit-area">Area</label>
-                            <div className="input-group">
+                            <div>
                               <input
-                                type="text"
-                                className="form-control"
-                                id="submit-area"
-                                name="area"
-                                pattern="\d*"
-                                required
+                                placeholder="Brüt m2"
+                                type="number"
+                                name="grossm2"
+                                style={{ width: "48%", marginRight: "4%" }}
+                                onChange={e => onChange(e)}
                               />
-                              <span className="input-group-addon">
-                                m<sup>2</sup>
-                              </span>
+                              <input
+                                placeholder="Net m2"
+                                type="number"
+                                name="netm2"
+                                style={{ width: "48%" }}
+                                onChange={e => onChange(e)}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-md-12 col-sm-12">
+                          <div className="form-group">
+                            <div>
+                              <input
+                                placeholder="Oda "
+                                type="number"
+                                name="roomCount"
+                                style={{ width: "32%", marginRight: "2%" }}
+                                onChange={e => onChange(e)}
+                              />
+                              <input
+                                placeholder="Salon"
+                                type="number"
+                                name="loungeCount"
+                                style={{ width: "32%", marginRight: "2%" }}
+                                onChange={e => onChange(e)}
+                              />
+                              <input
+                                placeholder="Banyo"
+                                type="number"
+                                name="bathroomCount"
+                                style={{ width: "32%" }}
+                                onChange={e => onChange(e)}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-md-12 col-sm-12">
+                          <div className="form-group">
+                            <div>
+                              <input
+                                placeholder="Bulunduğu Kat"
+                                type="number"
+                                name="floor"
+                                style={{ width: "48%", marginRight: "4%" }}
+                                onChange={e => onChange(e)}
+                              />
+                              <input
+                                placeholder="Kat Sayısı"
+                                type="number"
+                                name="totalFloor"
+                                style={{ width: "48%" }}
+                                onChange={e => onChange(e)}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-md-12 col-sm-12">
+                          <div className="form-group">
+                            <div>
+                              <input
+                                placeholder="Bina Yaşı"
+                                type="number"
+                                name="age"
+                                style={{ width: "48%", marginRight: "4%" }}
+                                onChange={e => onChange(e)}
+                              />
+                              <input
+                                placeholder="Aidat"
+                                type="number"
+                                name="dues"
+                                style={{ width: "48%" }}
+                                onChange={e => onChange(e)}
+                              />
                             </div>
                           </div>
                         </div>
                         <div className="col-md-6 col-sm-6">
                           <div className="form-group">
-                            <label htmlFor="submit-garages">Garages</label>
-                            <input
-                              type="text"
-                              className="form-control"
-                              id="submit-garages"
-                              name="garages"
-                              pattern="\d*"
-                              required
+                            <SimpleSelect
+                              placeholder="Isınma"
+                              setSelect={(e, name) => setSelect(e, name)}
+                              options={[
+                                { value: "Yok", label: "Yok" },
+                                { value: "Soba", label: "Soba" },
+                                {
+                                  value: "Doğalgaz Sobası",
+                                  label: "Doğalgaz Sobası"
+                                },
+                                {
+                                  value: "Kat Kaloriferi",
+                                  label: "Kat Kaloriferi"
+                                },
+                                {
+                                  value: "Merkezi",
+                                  label: "Merkezi"
+                                },
+                                {
+                                  value: "Merkezi (Pay Ölçer)",
+                                  label: "Merkezi (Pay Ölçer)"
+                                },
+                                {
+                                  value: "Doğalgaz (Kombi)",
+                                  label: "Doğalgaz (Kombi)"
+                                },
+                                {
+                                  value: "Yerden Isıtma",
+                                  label: "Yerden Isıtma"
+                                },
+                                {
+                                  value: "Klima",
+                                  label: "Klima"
+                                },
+                                {
+                                  value: "Fancoil Ünitesi",
+                                  label: "Fancoil Ünitesi"
+                                },
+                                {
+                                  value: "Güneş Enerjisi",
+                                  label: "Güneş Enerjisi"
+                                },
+                                {
+                                  value: "Jeotermal",
+                                  label: "Jeotermal"
+                                },
+                                {
+                                  value: "Şömine",
+                                  label: "Şömine"
+                                },
+                                {
+                                  value: "VRV",
+                                  label: "VRV"
+                                },
+                                {
+                                  value: "Isı Pompası",
+                                  label: "Isı Pompası"
+                                }
+                              ]}
+                              name="heating"
+                            />
+                          </div>
+                        </div>
+                        <div className="col-md-6 col-sm-6">
+                          <div className="form-group">
+                            <SimpleSelect
+                              placeholder="Kullanım"
+                              setSelect={(e, name) => setSelect(e, name)}
+                              options={[
+                                { value: "Boş", label: "Boş" },
+                                { value: "Kiracılı", label: "Kiracılı" },
+                                { value: "Mülk Sahibi", label: "Mülk Sahibi" }
+                              ]}
+                              name="usageStatus"
+                            />
+                          </div>
+                        </div>
+                        <div className="col-md-6 col-sm-6">
+                          <div className="form-group">
+                            <SimpleSelect
+                              placeholder="Site İçerisinde"
+                              setSelect={(e, name) => setSelect(e, name)}
+                              options={[
+                                { value: true, label: "Evet" },
+                                { value: false, label: "Hayır" }
+                              ]}
+                              name="inSite"
+                            />
+                          </div>
+                        </div>
+                        <div className="col-md-6 col-sm-6">
+                          <div className="form-group">
+                            <SimpleSelect
+                              placeholder="Balkon"
+                              setSelect={(e, name) => setSelect(e, name)}
+                              options={[
+                                { value: true, label: "Var" },
+                                { value: false, label: "Yok" }
+                              ]}
+                              name="balcony"
+                            />
+                          </div>
+                        </div>
+                        <div className="col-md-6 col-sm-6">
+                          <div className="form-group">
+                            <SimpleSelect
+                              placeholder="Eşyalı"
+                              options={[
+                                { value: true, label: "Evet" },
+                                { value: false, label: "Hayır" }
+                              ]}
+                              setSelect={(e, name) => setSelect(e, name)}
+                              name="furnished"
+                            />
+                          </div>
+                        </div>
+                        <div className="col-md-6 col-sm-6">
+                          <div className="form-group">
+                            <SimpleSelect
+                              placeholder="Takas"
+                              options={[
+                                { value: true, label: "Evet" },
+                                { value: false, label: "Hayır" }
+                              ]}
+                              setSelect={(e, name) => setSelect(e, name)}
+                              name="swap"
+                            />
+                          </div>
+                        </div>
+                        <div className="col-md-6 col-sm-6">
+                          <div className="form-group">
+                            <SimpleSelect
+                              placeholder="Cephe"
+                              options={[
+                                { value: "Kuzey", label: "Kuzey" },
+                                { value: "Güney", label: "Güney" },
+                                { value: "Doğu", label: "Doğu" },
+                                { value: "Batı", label: "Batı" }
+                              ]}
+                              setSelect={(e, name) => setSelect(e, name)}
+                              name="side"
                             />
                           </div>
                         </div>
@@ -244,15 +437,10 @@ const ListingForm = ({ addListing }) => {
               <div className="col-md-12 col-sm-12">
                 <div className="center">
                   <div className="form-group">
-                    <button type="submit" className="btn btn-default large">
-                      Proceed to Payment
+                    <button type="submit" className="btn btn-default xxl">
+                      İlan Ekle
                     </button>
                   </div>
-                  <figure className="note block">
-                    By clicking the “Proceed to Payment” or “Submit” button you
-                    agree with our{" "}
-                    <a href="terms-conditions.html">Terms and conditions</a>
-                  </figure>
                 </div>
               </div>
             </div>
@@ -270,4 +458,4 @@ ListingForm.propTypes = {
 export default connect(
   null,
   { addListing }
-)(ListingForm);
+)(withRouter(ListingForm));

@@ -4134,6 +4134,11 @@ input[type="text"]:hover, input[type="email"]:hover, input[type="search"]:hover,
   font-size: 18px;
   padding: 15px 20px;
 }
+.btn.xxl, select.xxl {
+  font-size: 24px;
+  padding: 15px 20px;
+  width: 100%
+}
 
 .checkbox, .radio {
   padding-left: 0px;
@@ -5894,3 +5899,4 @@ body, html {
   page-break-after: auto;
   margin: 0;
 }
+.input-group .form-control, .input-group-btn .btn, .Select-menu-outer { z-index: inherit !important; }

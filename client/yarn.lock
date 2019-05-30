@@ -8412,6 +8412,11 @@ react-event-listener@^0.6.2:
     prop-types "^15.6.0"
     warning "^4.0.1"
 
+react-flip-move@^3.0.1:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/react-flip-move/-/react-flip-move-3.0.3.tgz#3065b0b9e622ae73953aba725f8feed8e4643667"
+  integrity sha512-gR2jvjUgIXI7ceFWJkr8owX4vKhV0IJoXIf/Dt7gESFe5OKiSz2H6d10mKTW8fN134NDI16J4HgEgq9pKqJd5A==
+
 react-image-gallery@^0.8.17:
   version "0.8.17"
   resolved "https://registry.yarnpkg.com/react-image-gallery/-/react-image-gallery-0.8.17.tgz#13dc22481193e8e5e904f0bd83ef6a9a9975e850"
@@ -8422,6 +8427,14 @@ react-image-gallery@^0.8.17:
     prop-types "^15.5.8"
     react-swipeable "^5.2.0"
     resize-observer-polyfill "^1.5.0"
+
+react-images-upload@^1.2.6:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/react-images-upload/-/react-images-upload-1.2.6.tgz#3ac831537d14f48ec7ed599ff4c8839c903c5393"
+  integrity sha512-vw3cAj3LgN9ebhnfRkJ9bHK8d51b73Su8mepZv2HxVByskznsuox7PqxrUrTW14kZirbe0PXBIIMbTzOWJdPtw==
+  dependencies:
+    react "^16.2.0"
+    react-flip-move "^3.0.1"
 
 react-input-autosize@^2.2.1:
   version "2.2.1"
@@ -8610,7 +8623,7 @@ react-transition-group@^2.2.1, react-transition-group@^2.7.1:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react@^16.8.6:
+react@^16.2.0, react@^16.8.6:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"
   integrity sha512-pC0uMkhLaHm11ZSJULfOBqV4tIZkx87ZLvbbQYunNixAAvjnC+snJCg0XQXn9VIsttVsbZP/H/ewzgsd5fxKXw==

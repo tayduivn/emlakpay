@@ -59,7 +59,7 @@ export const favListing = listingId => async dispatch => {
 };
 
 //add listing
-export const addListing = formData => async dispatch => {
+export const addListing = (formData, history) => async dispatch => {
   const config = {
     header: {
       "Content-Type": "application/json"
@@ -67,14 +67,19 @@ export const addListing = formData => async dispatch => {
   };
 
   try {
-    const res = await axios.post("/api/post", formData, config);
+    const res = await axios.post("/api/listing", formData, config);
     dispatch({
       type: ADD_LISTING,
       payload: res.data
     });
 
     dispatch(setAlert("İlan Eklendi", "success"));
+    history.push("/listings");
   } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach(e => dispatch(setAlert(e.msg, "danger")));
+    }
     dispatch({
       type: LISTING_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }
