@@ -61,13 +61,12 @@ export const favListing = listingId => async dispatch => {
 //add listing
 export const addListing = (formData, history) => async dispatch => {
   const config = {
-    header: {
-      "Content-Type": "application/json"
+    headers: {
+      "Content-Type": "multipart/form-data"
     }
   };
-
   try {
-    const res = await axios.post("/api/listing", formData, config);
+    const res = await axios.post("/api/listing/up", formData, config);
     dispatch({
       type: ADD_LISTING,
       payload: res.data

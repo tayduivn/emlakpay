@@ -4,11 +4,34 @@ const auth = require("../../middleware/auth");
 const { check, validationResult } = require("express-validator/check");
 const Listing = require("../../models/Listing");
 const Profile = require("../../models/Profile");
-const User = require("../../models/User");
+const multer = require("multer");
+const multerGCS = require("multer-google-storage");
+const config = require("config");
+
+const GOOGLE_CLOUD_PROJECT_ID = config.get("gc-project");
+const GOOGLE_CLOUD_KEYFILE = "./config/Emlakpay-b544e179f709.json";
+const BUCKET_NAME = config.get("gc-storage");
+
+let uploadHandler = multer({
+  storage: multerGCS.storageEngine({
+    keyFilename: GOOGLE_CLOUD_KEYFILE,
+    projectId: GOOGLE_CLOUD_PROJECT_ID,
+    bucket: BUCKET_NAME
+  })
+});
+
+router.post("/up", uploadHandler.array("files", 10), async (req, res) => {
+  try {
+    console.log("done");
+  } catch (err) {
+    console.log(err.message);
+  }
+});
 
 router.post(
   "/",
   [
+    uploadHandler.single("file"),
     auth,
     [
       check("title", "Başlık boş bırakılamaz")
@@ -84,6 +107,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
+
     let location = {
       province: req.body.province,
       district: req.body.district,

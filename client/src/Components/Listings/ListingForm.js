@@ -32,8 +32,7 @@ const ListingForm = ({ addListing, history }) => {
     usageStatus: "",
     dues: "",
     swap: "",
-    side: null,
-    img: []
+    side: null
   });
 
   const {
@@ -57,24 +56,26 @@ const ListingForm = ({ addListing, history }) => {
     inSite,
     usageStatus,
     dues,
-    swap,
-    img
+    swap
   } = formData;
 
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const setImages = images => {
-    setFormData({ ...formData, img: images });
-  };
-
   const setSelect = (e, name) => {
     setFormData({ ...formData, [name]: e.value });
   };
 
-  const onSubmit = e => {
+  const [files, setFiles] = useState([]);
+  const setImages = images => {
+    console.log(images);
+    setFiles(images[0]);
+  };
+
+  const onSubmit = (e, history) => {
     e.preventDefault();
+    formData.append("files", files);
     addListing(formData, history);
   };
 
@@ -103,6 +104,7 @@ const ListingForm = ({ addListing, history }) => {
             id="form-submit"
             className="form-submit"
             onSubmit={e => onSubmit(e)}
+            encType="multipart/form-data"
           >
             <div className="row">
               <div className="block">

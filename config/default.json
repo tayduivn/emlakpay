@@ -1,4 +1,6 @@
 {
   "mongoURI": "mongodb+srv://admin357:eH4AqvgWULBtHQam@cluster0-d3xg5.mongodb.net/emlakpay?retryWrites=true",
-  "jwtSecret": "secrettoken"
+  "jwtSecret": "secrettoken",
+  "gc-project": "emlakpay",
+  "gc-storage": "emlakpay-user-uploads"
 }
