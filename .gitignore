@@ -1,3 +1,6 @@
+# Custom
+/config/
+
 # Logs
 logs
 *.log
