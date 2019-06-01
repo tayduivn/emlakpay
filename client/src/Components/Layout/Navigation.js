@@ -37,7 +37,7 @@ const Navigation = ({ auth: { isAuthenticated, loading }, logout }) => {
             <Link to="/my-listings">İlanlarım</Link>
           </li>
           <li>
-            <Link to="properties-listing-lines.html">Favori İlanlarım</Link>
+            <Link to="/my-favs">Favori İlanlarım</Link>
           </li>
         </ul>
       </li>

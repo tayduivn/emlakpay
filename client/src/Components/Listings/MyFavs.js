@@ -1,17 +1,24 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getListings } from "../../actions/listing";
 import Loading from "../Layout/Loading";
 import ListingItem from "./ListingItem";
-import SimpleSelect from "react-select";
+import SimpleSelect from "../Layout/SimpleSelect";
 import SearchListingVertical from "../Layout/SearchListingVertical";
 import { Link } from "react-router-dom";
+import { filterListings } from "../../actions/listing";
 
-const Listings = ({ getListings, listing: { listings, loading } }) => {
+const MyFavs = ({ filterListings, listing: { listings, loading }, auth }) => {
   useEffect(() => {
-    getListings();
-  }, [getListings]);
+    if (auth && auth.user) {
+      const userId = auth.user._id;
+      filterListings({ favedBy: userId });
+    }
+  }, [filterListings, auth]);
+
+  const setSelect = (e, name) => {
+    listings = listings.sort((a, b) => a.price - b.price);
+  };
   return loading ? (
     <Loading />
   ) : (
@@ -21,7 +28,10 @@ const Listings = ({ getListings, listing: { listings, loading } }) => {
           <li>
             <Link to="/">Anasayfa</Link>
           </li>
-          <li className="active">İlanlar</li>
+          <li>
+            <Link to="/listings">İlanlar</Link>
+          </li>
+          <li className="active">Favori İlanlarım</li>
         </ol>
       </div>
       <div className="container">
@@ -29,7 +39,7 @@ const Listings = ({ getListings, listing: { listings, loading } }) => {
           <div className="col-md-9 col-sm-9">
             <section id="results">
               <header>
-                <h1>İlanlar</h1>
+                <h1>Favori İlanlarım</h1>
               </header>
               <section id="search-filter">
                 <figure>
@@ -42,11 +52,14 @@ const Listings = ({ getListings, listing: { listings, loading } }) => {
                     <div className="form-group">
                       <SimpleSelect
                         placeholder="Sırala"
+                        name="sort"
                         options={[
-                          { value: "chocolate", label: "Chocolate" },
-                          { value: "strawberry", label: "Strawberry" },
-                          { value: "vanilla", label: "Vanilla" }
+                          { value: "0", label: "Eskiden Yeniye" },
+                          { value: "1", label: "Yeniden Eskiye" },
+                          { value: "2", label: "Pahalıdan Ucuza" },
+                          { value: "3", label: "Ucuzdan Pahalıya" }
                         ]}
+                        setSelect={(e, name) => setSelect(e, name)}
                       />
                     </div>
                   </div>
@@ -93,16 +106,18 @@ const Listings = ({ getListings, listing: { listings, loading } }) => {
   );
 };
 
-Listings.propTypes = {
-  getListings: PropTypes.func.isRequired,
-  listing: PropTypes.object.isRequired
+MyFavs.propTypes = {
+  filterListings: PropTypes.func.isRequired,
+  listing: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  listing: state.listing
+  listing: state.listing,
+  auth: state.auth
 });
 
 export default connect(
   mapStateToProps,
-  { getListings }
-)(Listings);
+  { filterListings }
+)(MyFavs);

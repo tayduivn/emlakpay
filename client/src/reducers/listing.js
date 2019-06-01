@@ -3,7 +3,8 @@ import {
   LISTING_ERROR,
   GET_LISTING,
   TOOGLE_FAVS,
-  ADD_LISTING
+  ADD_LISTING,
+  FILTER_LISTING
 } from "../actions/types";
 
 const initialState = {
@@ -40,6 +41,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         listing: payload,
+        loading: false
+      };
+    case FILTER_LISTING:
+      return {
+        ...state,
+        listings: payload,
         loading: false
       };
     default:

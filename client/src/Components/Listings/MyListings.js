@@ -1,19 +1,28 @@
 import React, { Fragment, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getListings } from "../../actions/listing";
 import Loading from "../Layout/Loading";
 import ListingItem from "./ListingItem";
-import SimpleSelect from "react-select";
+import SimpleSelect from "../Layout/SimpleSelect";
 import SearchListingVertical from "../Layout/SearchListingVertical";
 import { Link } from "react-router-dom";
-import { loadUser } from "../../actions/auth";
+import { filterListings } from "../../actions/listing";
 
-const MyListings = ({ getListings, listing: { listings, loading }, auth }) => {
+const MyListings = ({
+  filterListings,
+  listing: { listings, loading },
+  auth
+}) => {
   useEffect(() => {
-    getListings();
-  }, [getListings]);
+    if (auth && auth.user) {
+      const userId = auth.user._id;
+      filterListings({ user: userId });
+    }
+  }, [filterListings, auth]);
 
+  const setSelect = (e, name) => {
+    listings = listings.sort((a, b) => a.price - b.price);
+  };
   return loading ? (
     <Loading />
   ) : (
@@ -54,6 +63,7 @@ const MyListings = ({ getListings, listing: { listings, loading }, auth }) => {
                           { value: "2", label: "Pahalıdan Ucuza" },
                           { value: "3", label: "Ucuzdan Pahalıya" }
                         ]}
+                        setSelect={(e, name) => setSelect(e, name)}
                       />
                     </div>
                   </div>
@@ -68,7 +78,9 @@ const MyListings = ({ getListings, listing: { listings, loading }, auth }) => {
                       </div>
                     ))
                   ) : (
-                    <h4> İlan Bulunamadı </h4>
+                    <div className="col-md-4 col-sm-4">
+                      <h3> İlan Bulunamadı </h3>
+                    </div>
                   )}
                 </div>
                 <section id="advertising">
@@ -99,10 +111,9 @@ const MyListings = ({ getListings, listing: { listings, loading }, auth }) => {
 };
 
 MyListings.propTypes = {
-  getListings: PropTypes.func.isRequired,
+  filterListings: PropTypes.func.isRequired,
   listing: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
-  loadUser: PropTypes.func.isRequired
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -112,5 +123,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getListings, loadUser }
+  { filterListings }
 )(MyListings);

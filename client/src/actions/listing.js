@@ -6,7 +6,8 @@ import {
   GET_LISTING,
   TOOGLE_FAVS,
   GET_PROFILE,
-  ADD_LISTING
+  ADD_LISTING,
+  FILTER_LISTING
 } from "./types";
 export const getListings = () => async dispatch => {
   try {
@@ -75,6 +76,23 @@ export const addListing = (formData, history) => async dispatch => {
     history.push("/listings");
   } catch (err) {
     console.log(err);
+    dispatch({
+      type: LISTING_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+export const filterListings = query => async dispatch => {
+  try {
+    let encodedQuery = Buffer.from(JSON.stringify(query)).toString("base64");
+    const res = await axios.get(`/api/listing/filter/${encodedQuery}`);
+
+    dispatch({
+      type: FILTER_LISTING,
+      payload: res.data
+    });
+  } catch (err) {
     dispatch({
       type: LISTING_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }

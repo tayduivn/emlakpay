@@ -2,6 +2,9 @@ import React from "react";
 import SimpleSelect from "./SimpleSelect";
 import LocationSelector from "./LocationSelector";
 const SearchListingVertical = () => {
+  const setSelect = (e, name) => {
+    console.log(123);
+  };
   return (
     <section id="sidebar">
       <aside id="edit-search">
@@ -21,6 +24,7 @@ const SearchListingVertical = () => {
                 { value: "Satılık", label: "Satılık" },
                 { value: "Kiralık", label: "Kiralık" }
               ]}
+              setSelect={(e, name) => setSelect(e, name)}
             />
           </div>
           <div className="form-group">
@@ -34,6 +38,7 @@ const SearchListingVertical = () => {
                 { value: "Devremülk", label: "Devremülk" },
                 { value: "Turistik Tesis", label: "Turistik Tesis" }
               ]}
+              setSelect={(e, name) => setSelect(e, name)}
             />
           </div>
           <div className="form-group">

@@ -276,4 +276,19 @@ router.put("/fav/:id", auth, async (req, res) => {
   }
 });
 
+router.get("/filter/:q", auth, async (req, res) => {
+  try {
+    var decodedQuery = new Buffer.from(req.params.q, "base64").toString();
+    const queryObject = JSON.parse(decodedQuery);
+
+    const listings = await Listing.find(queryObject);
+    return res.json(listings);
+  } catch (err) {
+    if (err.kind === "ObjectId") {
+      return res.status(404).json({ msg: "İlan bulunamadı" });
+    }
+    res.status(500).send("Server Error");
+  }
+});
+
 module.exports = router;
