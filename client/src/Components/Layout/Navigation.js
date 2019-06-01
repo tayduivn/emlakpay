@@ -34,7 +34,7 @@ const Navigation = ({ auth: { isAuthenticated, loading }, logout }) => {
             <Link to="/new-listing">İlan Ekle</Link>
           </li>
           <li>
-            <Link to="properties-listing-grid.html">İlanlarım</Link>
+            <Link to="/my-listings">İlanlarım</Link>
           </li>
           <li>
             <Link to="properties-listing-lines.html">Favori İlanlarım</Link>

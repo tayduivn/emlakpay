@@ -14,6 +14,7 @@ import Profiles from "./Components/Profiles/Profiles";
 import Profile from "./Components/Profile/Profile";
 import PrivateRoute from "./Components/Routing/PrivateRoute";
 import Listings from "./Components/Listings/Listings";
+import MyListings from "./Components/Listings/MyListings";
 import Listing from "./Components/Listing/Listing";
 import ListingForm from "./Components/Listings/ListingForm";
 //Redux
@@ -45,6 +46,7 @@ const App = () => {
             <PrivateRoute exact path="/profiles" component={Profiles} />
             <PrivateRoute exact path="/profile/:id" component={Profile} />
             <PrivateRoute exact path="/listings" component={Listings} />
+            <PrivateRoute exact path="/my-listings" component={MyListings} />
             <PrivateRoute exact path="/listing/:id" component={Listing} />
             <PrivateRoute exact path="/new-listing" component={ListingForm} />
           </Switch>
