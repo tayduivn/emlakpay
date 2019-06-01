@@ -5,32 +5,32 @@ const ListingSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
   },
-  title: { type: String, required: true },
+  title: { type: String },
   brief: { type: String },
   location: {
-    province: { type: String, required: true },
-    district: { type: String, required: true },
-    neighborhood: { type: String, required: true }
+    province: { type: String },
+    district: { type: String },
+    neighborhood: { type: String }
   },
-  price: { type: Number, required: true },
+  price: { type: Number },
   listingDate: { type: Date, default: Date.now },
-  propertyType: { type: String, required: true }, //Konut İşyeri Arsa Bina Devremülk "Turistik Tesis"
-  propertyStatus: { type: String, required: true }, //Satılık Kiralık
-  grossm2: { type: Number, required: true },
-  netm2: { type: Number, required: true },
-  roomCount: { type: Number, required: true },
-  loungeCount: { type: Number, required: true },
-  bathroomCount: { type: Number, required: true },
-  age: { type: Number, required: true },
-  floor: { type: Number, required: true },
-  totalFloor: { type: Number, required: true },
-  heating: { type: String, required: true }, //Yok "Soba" "Doğalgaz Sobası" "Kat Kaloriferi" "Merkezi" "Merkezi (Pay Ölçer)" "Doğalgaz (Kombi)" "Yerden Isıtma" Klima" Fancoil Ünitesi" "Güneş Enerjisi" Jeotermal Şömine VRV "Isı Pompası"
-  balcony: { type: Boolean, required: true },
-  furnished: { type: Boolean, required: true },
-  inSite: { type: Boolean, required: true },
-  usageStatus: { type: String, required: true }, //Boş Kiracılı Mülk Sahibi
-  dues: { type: Number, required: true },
-  swap: { type: Boolean, required: true },
+  propertyType: { type: String }, //Konut İşyeri Arsa Bina Devremülk "Turistik Tesis"
+  propertyStatus: { type: String }, //Satılık Kiralık
+  grossm2: { type: Number },
+  netm2: { type: Number },
+  roomCount: { type: Number },
+  loungeCount: { type: Number },
+  bathroomCount: { type: Number },
+  age: { type: Number },
+  floor: { type: Number },
+  totalFloor: { type: Number },
+  heating: { type: String }, //Yok "Soba" "Doğalgaz Sobası" "Kat Kaloriferi" "Merkezi" "Merkezi (Pay Ölçer)" "Doğalgaz (Kombi)" "Yerden Isıtma" Klima" Fancoil Ünitesi" "Güneş Enerjisi" Jeotermal Şömine VRV "Isı Pompası"
+  balcony: { type: Boolean },
+  furnished: { type: Boolean },
+  inSite: { type: Boolean },
+  usageStatus: { type: String }, //Boş Kiracılı Mülk Sahibi
+  dues: { type: Number },
+  swap: { type: Boolean },
   side: { type: String }, //Batı Doğu Güney Kuzey
   favedBy: { type: Array, default: [] },
   img: { type: Array, default: [] }

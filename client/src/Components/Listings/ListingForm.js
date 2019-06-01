@@ -11,53 +11,29 @@ const ListingForm = ({ addListing, history }) => {
   const [formData, setFormData] = useState({
     title: "",
     brief: "",
-    district: "Izmir",
-    province: "Urla",
-    neighborhood: "Fevzi",
-    price: "",
-    propertyType: "",
-    propertyStatus: "",
-    grossm2: "",
-    netm2: "",
-    roomCount: "",
-    loungeCount: "",
-    bathroomCount: "",
-    age: "",
-    floor: "",
-    totalFloor: "",
-    heating: "",
-    balcony: "",
-    furnished: "",
-    inSite: "",
-    usageStatus: "",
-    dues: "",
-    swap: "",
+    district: "",
+    province: "",
+    neighborhood: "",
+    price: 0,
+    propertyType: "Konut",
+    propertyStatus: "Kiralık",
+    grossm2: 0,
+    netm2: 0,
+    roomCount: 0,
+    loungeCount: 0,
+    bathroomCount: 0,
+    age: 0,
+    floor: 0,
+    totalFloor: 0,
+    heating: "Yok",
+    balcony: false,
+    furnished: false,
+    inSite: false,
+    usageStatus: "Boş",
+    dues: 0,
+    swap: false,
     side: null
   });
-
-  const {
-    title,
-    brief,
-    location,
-    price,
-    propertyType,
-    propertyStatus,
-    grossm2,
-    netm2,
-    roomCount,
-    loungeCount,
-    bathroomCount,
-    age,
-    floor,
-    totalFloor,
-    heating,
-    balcony,
-    furnished,
-    inSite,
-    usageStatus,
-    dues,
-    swap
-  } = formData;
 
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -67,16 +43,25 @@ const ListingForm = ({ addListing, history }) => {
     setFormData({ ...formData, [name]: e.value });
   };
 
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState("");
   const setImages = images => {
-    console.log(images);
-    setFiles(images[0]);
+    setFiles(images);
   };
 
-  const onSubmit = (e, history) => {
+  const onSubmit = e => {
     e.preventDefault();
-    formData.append("files", files);
-    addListing(formData, history);
+    const form = new FormData();
+
+    Object.keys(formData).forEach(key => {
+      form.append(key, formData[key]);
+    });
+
+    if (files) {
+      files.forEach(f => {
+        form.append("files", f);
+      });
+    }
+    addListing(form, history);
   };
 
   return (
@@ -120,7 +105,6 @@ const ListingForm = ({ addListing, history }) => {
                               className="form-control"
                               id="submit-title"
                               name="title"
-                              value={title}
                               onChange={e => onChange(e)}
                             />
                           </div>

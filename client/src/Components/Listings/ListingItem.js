@@ -27,6 +27,7 @@ const ListingItem = ({
             <img
               alt=""
               src={img[0] ? img[0] : "/assets/img/properties/property-09.jpg"}
+              style={{ maxHeight: "200px" }}
             />
           </div>
 

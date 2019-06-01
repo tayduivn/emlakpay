@@ -6,6 +6,7 @@ import Loading from "../Layout/Loading";
 import ListingItem from "./ListingItem";
 import SimpleSelect from "react-select";
 import SearchListingVertical from "../Layout/SearchListingVertical";
+import { Link } from "react-router-dom";
 
 const Listings = ({ getListings, listing: { listings, loading } }) => {
   useEffect(() => {
@@ -64,7 +65,7 @@ const Listings = ({ getListings, listing: { listings, loading } }) => {
                   )}
                 </div>
                 <section id="advertising">
-                  <a href="submit.html">
+                  <Link to="/new-listing">
                     <div className="banner">
                       <div className="wrapper">
                         <span className="title">
@@ -75,7 +76,7 @@ const Listings = ({ getListings, listing: { listings, loading } }) => {
                         </span>
                       </div>
                     </div>
-                  </a>
+                  </Link>
                 </section>
               </section>
             </section>

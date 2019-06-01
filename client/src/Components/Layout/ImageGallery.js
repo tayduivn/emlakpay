@@ -6,10 +6,10 @@ const ImageGallery = ({ imgArray }) => {
     <Carousel
       wrapAround={true}
       enableKeyboardControls={true}
-      heightMode={"max"}
+      heightMode={"first"}
     >
       {imgArray.map(link => (
-        <img src={link} />
+        <img src={link} key={link} />
       ))}
     </Carousel>
   );
