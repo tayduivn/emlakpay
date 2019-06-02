@@ -4,6 +4,7 @@ import "./App.css";
 
 import Navigation from "./Components/Layout/Navigation";
 import Landing from "./Components/Layout/Landing";
+import Contact from "./Components/Layout/Contact";
 import Footer from "./Components/Layout/Footer";
 import Register from "./Components/Auth/Register";
 import Login from "./Components/Auth/Login";
@@ -42,6 +43,7 @@ const App = () => {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/logout" component={Logout} />
+            <Route exact path="/contact" component={Contact} />
             <PrivateRoute exact path="/me" component={Me} />
             <PrivateRoute exact path="/account" component={Account} />
             <PrivateRoute exact path="/profiles" component={Profiles} />

@@ -88,7 +88,7 @@ const Navigation = ({ auth: { isAuthenticated, loading }, logout }) => {
               <strong>Telefon:</strong>0(232) 765 77 66{" "}
             </figure>
             <figure>
-              <strong>E-posta:</strong>destek@emlakpay.com
+              <strong>E-posta:</strong>selam@emlakpay.com
             </figure>
           </div>
           <div className="user-area">

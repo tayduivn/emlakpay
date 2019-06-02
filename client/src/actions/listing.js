@@ -75,7 +75,6 @@ export const addListing = (formData, history) => async dispatch => {
     dispatch(setAlert("İlan Eklendi", "success"));
     history.push("/listings");
   } catch (err) {
-    console.log(err);
     dispatch({
       type: LISTING_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }

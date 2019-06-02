@@ -45,7 +45,7 @@ const Footer = () => {
                   </address>
                   0 (232) 765 77 66
                   <br />
-                  destek@emlakpay.com
+                  selam@emlakpay.com
                 </article>
               </div>
               <div className="col-md-3 col-sm-3">

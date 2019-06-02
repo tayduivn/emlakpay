@@ -59,7 +59,6 @@ export const getProfileById = userId => async dispatch => {
 
 //Create or Update profile
 export const createProfile = formData => async dispatch => {
-  console.log(formData);
   try {
     const config = {
       headers: {
