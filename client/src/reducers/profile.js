@@ -2,7 +2,8 @@ import {
   GET_PROFILE,
   PROFILE_ERROR,
   CLEAR_PROFILE,
-  GET_PROFILES
+  GET_PROFILES,
+  CHANGE_AVATAR
 } from "../actions/types";
 
 const initialState = {
@@ -22,6 +23,7 @@ export default function(state = initialState, action) {
         loading: false
       };
     case GET_PROFILES:
+    case CHANGE_AVATAR:
       return {
         ...state,
         profiles: payload,

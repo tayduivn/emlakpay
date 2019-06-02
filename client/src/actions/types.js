@@ -18,3 +18,4 @@ export const LISTING_ERROR = "LISTING_ERROR";
 export const TOOGLE_FAVS = "TOOGLE_FAVS";
 export const ADD_LISTING = "ADD_LISTING";
 export const FILTER_LISTING = "FILTER_LISTING";
+export const CHANGE_AVATAR = "CHANGE_AVATAR";

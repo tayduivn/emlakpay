@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import Loading from "../Layout/Loading";
+import { changeAvatar } from "../../actions/profile";
 import {
   createProfile,
   deleteAccount,
@@ -13,7 +14,8 @@ const Account = ({
   getCurrentProfile,
   createProfile,
   deleteAccount,
-  profile: { profile, loading }
+  profile: { profile, loading },
+  changeAvatar
 }) => {
   const [formData, setFormData] = useState({
     name: "",
@@ -28,9 +30,13 @@ const Account = ({
     twitter: "",
     city: ""
   });
+
+  const [file, setFile] = useState("");
+
   useEffect(() => {
     getCurrentProfile();
   }, [getCurrentProfile]);
+
   useEffect(() => {
     if (profile) {
       setFormData({
@@ -73,6 +79,21 @@ const Account = ({
     createProfile(formData);
   };
 
+  const setAvatar = e => {
+    console.log(111);
+    setFile(e.target.file);
+  };
+  const onAvatarSubmit = e => {
+    console.log(22211);
+    e.preventDefault();
+    const form = new FormData();
+    console.log(file);
+    if (file) {
+      form.append("file", file);
+    }
+    changeAvatar(form);
+  };
+
   return loading ? (
     <div className="loading">
       <Loading />
@@ -99,19 +120,28 @@ const Account = ({
           <div className="account-profile">
             <div className="row">
               <div className="col-md-3 col-sm-3">
-                <img
-                  alt=""
-                  className="image"
-                  src={avatar}
-                  style={{
-                    width: "150px",
-                    height: "150px",
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                    borderRadius: "50%",
-                    display: "block"
-                  }}
-                />
+                <form onSubmit={e => onAvatarSubmit(e)}>
+                  <img
+                    alt=""
+                    className="image"
+                    src={avatar}
+                    style={{
+                      width: "150px",
+                      height: "150px",
+                      marginLeft: "auto",
+                      marginRight: "auto",
+                      borderRadius: "50%",
+                      display: "block"
+                    }}
+                  />
+                  <input
+                    type="file"
+                    name="file"
+                    id=""
+                    onChange={e => setAvatar(e)}
+                  />
+                  <button type="submit">Yukle</button>
+                </form>
               </div>
 
               <div className="col-md-9 col-sm-9">
@@ -366,7 +396,8 @@ Account.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
   createProfile: PropTypes.func.isRequired,
   deleteAccount: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
+  changeAvatar: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({
   profile: state.profile
@@ -374,5 +405,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile, createProfile, deleteAccount }
+  { getCurrentProfile, createProfile, deleteAccount, changeAvatar }
 )(withRouter(Account));

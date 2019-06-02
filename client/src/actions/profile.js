@@ -6,7 +6,8 @@ import {
   PROFILE_ERROR,
   CLEAR_PROFILE,
   ACCOUNT_DELETED,
-  GET_PROFILES
+  GET_PROFILES,
+  CHANGE_AVATAR
 } from "./types";
 
 export const getCurrentProfile = () => async dispatch => {
@@ -102,5 +103,26 @@ export const deleteAccount = () => async dispatch => {
         payload: { msg: err.response.statusText, status: err.response.status }
       });
     }
+  }
+};
+
+export const changeAvatar = formData => async dispatch => {
+  const config = {
+    headers: {
+      "Content-Type": undefined
+    }
+  };
+  try {
+    const res = await axios.post("/api/profile/avatar", formData, config);
+    dispatch({
+      type: CHANGE_AVATAR,
+      payload: res.data
+    });
+    dispatch(setAlert("Profile Fotosu Değiştirildi", "success"));
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
   }
 };

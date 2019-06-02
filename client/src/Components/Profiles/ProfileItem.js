@@ -5,44 +5,33 @@ const ProfileItem = ({
   profile: { name, surname, avatar, email, phoneNo, company, city, user }
 }) => {
   return (
-    <div className="agent">
-      <img alt="" src={avatar} width="" className="agent-image" />
-      <div className="wrapper">
-        <header>
-          <Link to={`/profile/${user}`}>
-            <h2>
-              {name} {surname}
-            </h2>
-          </Link>
-        </header>
-        <dl>
-          <dt>Telefon:</dt>
-          <dd>{phoneNo}</dd>
-          {email ? (
-            <Fragment>
-              <dt>E-posta:</dt>
-              <dd>{email}</dd>
-            </Fragment>
-          ) : (
-            <Fragment />
-          )}
-          {company ? (
-            <Fragment>
-              <dt>Emlak Ofisi:</dt>
-              <dd>{company}</dd>
-            </Fragment>
-          ) : (
-            <Fragment />
-          )}
-          {city ? (
-            <Fragment>
-              <dt>Şehir:</dt>
-              <dd>{city}</dd>
-            </Fragment>
-          ) : (
-            <Fragment />
-          )}
-        </dl>
+    <div class="col-md-12 col-lg-12">
+      <div class="agent">
+        <Link to={`/profile/${user._id}`} class="agent-image">
+          <img alt="" src="assets/img/agent-01.jpg" />
+        </Link>
+        <div class="wrapper">
+          <header>
+            <Link to={`/profile/${user._id}`}>
+              <h2>
+                {name} {surname}
+              </h2>
+            </Link>
+          </header>
+
+          <dl>
+            <dt>Telefon:</dt>
+            <dd>{phoneNo ? phoneNo : "-"}</dd>
+            <dt>E-Posta:</dt>
+            <dd>
+              <a href={`mailto:${{ email }}`}>{email ? email : "-"}</a>
+            </dd>
+            <dt>Emlak Ofisi:</dt>
+            <dd>{company ? company : "-"}</dd>
+            <dt>Şehir:</dt>
+            <dd>{city ? city : "-"}</dd>
+          </dl>
+        </div>
       </div>
     </div>
   );

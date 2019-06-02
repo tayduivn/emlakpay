@@ -6,6 +6,22 @@ const User = require("../../models/User");
 const Listing = require("../../models/Listing");
 const { check, validationResult } = require("express-validator/check");
 
+const multer = require("multer");
+const multerGCS = require("multer-google-storage");
+const config = require("config");
+
+const GOOGLE_CLOUD_PROJECT_ID = config.get("gc-project");
+const GOOGLE_CLOUD_KEYFILE = "./config/Emlakpay-b544e179f709.json";
+const BUCKET_NAME = config.get("gc-storage");
+
+let uploadHandler = multer({
+  storage: multerGCS.storageEngine({
+    keyFilename: GOOGLE_CLOUD_KEYFILE,
+    projectId: GOOGLE_CLOUD_PROJECT_ID,
+    bucket: BUCKET_NAME
+  })
+});
+
 router.get("/me", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id });
@@ -94,7 +110,7 @@ router.post(
 //get all profiles
 router.get("/", auth, async (req, res) => {
   try {
-    const profiles = await Profile.find();
+    const profiles = await Profile.find().populate("user");
     res.json(profiles);
   } catch (error) {
     console.error(error.message);
@@ -135,5 +151,24 @@ router.delete("/", auth, async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
+
+router.post(
+  "/avatar",
+  [auth, uploadHandler.single("file")],
+  async (req, res) => {
+    if (req.file) {
+      try {
+        const oldProfile = await Profile.findOne({ user: req.user.id });
+        oldProfile.avatar = req.file.path;
+        const profile = await oldProfile.save();
+        return res.json(profile);
+      } catch (error) {
+        console.log(error);
+        return res.status(500).send({ msg: "Hata, foto yüklenemedi" });
+      }
+    }
+    return res.status(400).send({ msg: "Hata, foto bulunamadı" });
+  }
+);
 
 module.exports = router;
