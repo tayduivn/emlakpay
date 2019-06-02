@@ -3,7 +3,8 @@ import {
   PROFILE_ERROR,
   CLEAR_PROFILE,
   GET_PROFILES,
-  CHANGE_AVATAR
+  CHANGE_AVATAR,
+  PROFILE_LOADING
 } from "../actions/types";
 
 const initialState = {
@@ -42,6 +43,11 @@ export default function(state = initialState, action) {
         profile: {},
         loading: false,
         profiles: []
+      };
+    case PROFILE_LOADING:
+      return {
+        ...state,
+        loading: true
       };
     default:
       return state;

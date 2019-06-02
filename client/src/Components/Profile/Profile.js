@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Loading from "../Layout/Loading";
 import { getProfileById } from "../../actions/profile";
 import ListingItem from "../Listings/ListingItem";
-import { getListings } from "../../actions/listing";
+import { filterListings } from "../../actions/listing";
 import SocialNetworks from "./SocialNetworks";
 import { Link } from "react-router-dom";
 
@@ -13,13 +13,14 @@ const Profile = ({
   profile: { profile, loading },
   match,
   listing: { listings },
-  getListings
+  filterListings
 }) => {
   useEffect(() => {
     getProfileById(match.params.id);
-    getListings();
-  }, [getProfileById, match.params.id, getListings]);
-
+  }, [getProfileById, match.params.id]);
+  useEffect(() => {
+    filterListings({ user: match.params.id });
+  }, [filterListings, match.params.id]);
   return (
     <Fragment>
       {loading || profile == null ? (
@@ -116,7 +117,7 @@ const Profile = ({
                   <hr className="thick" />
                   <section id="agent-properties">
                     <header>
-                      <h3>My Properties (24)</h3>
+                      <h3>Portföy ({listings.length})</h3>
                     </header>
                     <div className="layout-expandable">
                       <div className="row">
@@ -152,7 +153,7 @@ const Profile = ({
 
 Profile.propTypes = {
   getProfileById: PropTypes.func.isRequired,
-  getListings: PropTypes.func.isRequired,
+  filterListings: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
@@ -161,5 +162,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { getProfileById, getListings }
+  { getProfileById, filterListings }
 )(Profile);

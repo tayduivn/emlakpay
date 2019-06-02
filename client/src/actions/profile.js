@@ -7,12 +7,13 @@ import {
   CLEAR_PROFILE,
   ACCOUNT_DELETED,
   GET_PROFILES,
-  CHANGE_AVATAR
+  CHANGE_AVATAR,
+  PROFILE_LOADING
 } from "./types";
 
 export const getCurrentProfile = () => async dispatch => {
   try {
-    dispatch({ type: CLEAR_PROFILE });
+    dispatch({ type: PROFILE_LOADING });
     const res = await axios.get("/api/profile/me");
     dispatch({
       type: GET_PROFILE,
@@ -29,6 +30,9 @@ export const getCurrentProfile = () => async dispatch => {
 //Get all profiles
 export const getProfiles = () => async dispatch => {
   try {
+    dispatch({
+      type: PROFILE_LOADING
+    });
     const res = await axios.get("/api/profile");
     dispatch({
       type: GET_PROFILES,
@@ -45,6 +49,7 @@ export const getProfiles = () => async dispatch => {
 //Get profile by id
 export const getProfileById = userId => async dispatch => {
   try {
+    dispatch({ type: PROFILE_LOADING });
     const res = await axios.get(`/api/profile/user/${userId}`);
     dispatch({
       type: GET_PROFILE,
@@ -61,6 +66,7 @@ export const getProfileById = userId => async dispatch => {
 //Create or Update profile
 export const createProfile = formData => async dispatch => {
   try {
+    dispatch({ type: PROFILE_LOADING });
     const config = {
       headers: {
         "Content-Type": "application/json"
@@ -92,6 +98,7 @@ export const deleteAccount = () => async dispatch => {
     )
   ) {
     try {
+      dispatch({ type: PROFILE_LOADING });
       await axios.delete("/api/profile");
       dispatch({ type: CLEAR_PROFILE });
       dispatch({ type: ACCOUNT_DELETED });
@@ -113,6 +120,7 @@ export const changeAvatar = formData => async dispatch => {
     }
   };
   try {
+    dispatch({ type: PROFILE_LOADING });
     const res = await axios.post("/api/profile/avatar", formData, config);
     dispatch({
       type: CHANGE_AVATAR,

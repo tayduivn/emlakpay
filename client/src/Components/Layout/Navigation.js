@@ -21,9 +21,6 @@ const Navigation = ({ auth: { isAuthenticated, loading }, logout }) => {
   );
   const authMidLinks = (
     <ul className="nav navbar-nav">
-      <li>
-        <Link to="/">Anasayfa</Link>
-      </li>
       <li className="has-child">
         <Link to="#">İlanlar</Link>
         <ul className="child-navigation">
@@ -69,7 +66,7 @@ const Navigation = ({ auth: { isAuthenticated, loading }, logout }) => {
 
   const guestMidLinks = (
     <ul className="nav navbar-nav">
-      <li className="active">
+      <li>
         <Link to="/">Anasayfa</Link>
       </li>
 

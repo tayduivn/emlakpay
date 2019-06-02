@@ -4,7 +4,8 @@ import {
   GET_LISTING,
   TOOGLE_FAVS,
   ADD_LISTING,
-  FILTER_LISTING
+  FILTER_LISTING,
+  LISTING_LOADING
 } from "../actions/types";
 
 const initialState = {
@@ -48,6 +49,11 @@ export default function(state = initialState, action) {
         ...state,
         listings: payload,
         loading: false
+      };
+    case LISTING_LOADING:
+      return {
+        ...state,
+        loading: true
       };
     default:
       return state;

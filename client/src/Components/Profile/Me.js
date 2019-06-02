@@ -6,18 +6,25 @@ import { Link } from "react-router-dom";
 import ListingItem from "../Listings/ListingItem";
 import Loading from "../Layout/Loading";
 import SocialNetworks from "./SocialNetworks";
-import { getListings } from "../../actions/listing";
+import { filterListings } from "../../actions/listing";
 
 const Me = ({
   getCurrentProfile,
   profile: { profile, loading },
   listing: { listings },
-  getListings
+  filterListings,
+  auth
 }) => {
   useEffect(() => {
-    getListings();
     getCurrentProfile();
-  }, [getCurrentProfile, getListings]);
+  }, [getCurrentProfile]);
+
+  useEffect(() => {
+    if (auth && auth.user) {
+      const userId = auth.user._id;
+      filterListings({ user: userId });
+    }
+  }, [filterListings, auth]);
 
   return (
     <div>
@@ -109,7 +116,7 @@ const Me = ({
                   <hr className="thick" />
                   <section id="agent-properties">
                     <header>
-                      <h3>My Properties (24)</h3>
+                      <h3>Portföy ({listings.length})</h3>
                     </header>
                     <div className="layout-expandable">
                       <div className="row">
@@ -145,15 +152,17 @@ const Me = ({
 
 Me.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
-  getListings: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired
+  filterListings: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
   profile: state.profile,
-  listing: state.listing
+  listing: state.listing,
+  auth: state.auth
 });
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile, getListings }
+  { getCurrentProfile, filterListings }
 )(Me);

@@ -5,12 +5,12 @@ const ProfileItem = ({
   profile: { name, surname, avatar, email, phoneNo, company, city, user }
 }) => {
   return (
-    <div class="col-md-12 col-lg-12">
-      <div class="agent">
-        <Link to={`/profile/${user._id}`} class="agent-image">
+    <div className="col-md-12 col-lg-12">
+      <div className="agent">
+        <Link to={`/profile/${user._id}`} className="agent-image">
           <img alt="" src="assets/img/agent-01.jpg" />
         </Link>
-        <div class="wrapper">
+        <div className="wrapper">
           <header>
             <Link to={`/profile/${user._id}`}>
               <h2>

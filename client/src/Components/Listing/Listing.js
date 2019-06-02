@@ -99,6 +99,12 @@ const Listing = ({
                 <section id="property-gallery">
                   {img && img.length > 0 ? <ImageGallery imgArray={img} /> : ""}
                 </section>
+                <section id="description">
+                  <header>
+                    <h2>İlan Açıklaması</h2>
+                  </header>
+                  <p>{brief}</p>
+                </section>
               </div>
               <div className="col-md-3 col-sm-12">
                 <section id="quick-summary" className="clearfix">
@@ -175,9 +181,9 @@ const Listing = ({
                     <section className="agent-form">
                       <aside className="agent-info clearfix">
                         <figure>
-                          <a href="agent-detail.html">
+                          <Link to={`/profile/${listing.user}`}>
                             <img alt="" src={profile.avatar} />
-                          </a>
+                          </Link>
                         </figure>
                         <div className="agent-contact-info">
                           <h3>
@@ -187,8 +193,6 @@ const Listing = ({
                           <dl>
                             <dt>Telefon No:</dt>
                             <dd>{profile.phoneNo}</dd>
-                            <dt>Mobile:</dt>
-                            <dd>888 123 456 789</dd>
                             <dt>Email:</dt>
                             <dd>{profile.email}</dd>
                             <dt>Emlak Ofisi:</dt>

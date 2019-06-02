@@ -11,6 +11,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   useEffect(() => {
     getProfiles();
   }, [getProfiles]);
+  console.log(loading);
   return (
     <div>
       {loading ? (

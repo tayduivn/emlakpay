@@ -7,10 +7,12 @@ import {
   TOOGLE_FAVS,
   GET_PROFILE,
   ADD_LISTING,
-  FILTER_LISTING
+  FILTER_LISTING,
+  LISTING_LOADING
 } from "./types";
 export const getListings = () => async dispatch => {
   try {
+    dispatch({ type: LISTING_LOADING });
     const res = await axios.get("/api/listing");
     dispatch({
       type: GET_LISTINGS,
@@ -26,6 +28,7 @@ export const getListings = () => async dispatch => {
 
 export const getListingById = listingId => async dispatch => {
   try {
+    dispatch({ type: LISTING_LOADING });
     const res = await axios.get(`/api/listing/${listingId}`);
     dispatch({
       type: GET_LISTING,
@@ -67,6 +70,7 @@ export const addListing = (formData, history) => async dispatch => {
     }
   };
   try {
+    dispatch({ type: LISTING_LOADING });
     const res = await axios.post("/api/listing", formData, config);
     dispatch({
       type: ADD_LISTING,
@@ -84,6 +88,7 @@ export const addListing = (formData, history) => async dispatch => {
 
 export const filterListings = query => async dispatch => {
   try {
+    dispatch({ type: LISTING_LOADING });
     let encodedQuery = Buffer.from(JSON.stringify(query)).toString("base64");
     const res = await axios.get(`/api/listing/filter/${encodedQuery}`);
 
