@@ -9,13 +9,15 @@ import {
   deleteAccount,
   getCurrentProfile
 } from "../../actions/profile";
+import { setAlert } from "../../actions/alert";
 
 const Account = ({
   getCurrentProfile,
   createProfile,
   deleteAccount,
   profile: { profile, loading },
-  changeAvatar
+  changeAvatar,
+  setAlert
 }) => {
   const [formData, setFormData] = useState({
     name: "",
@@ -80,11 +82,10 @@ const Account = ({
   };
 
   const setAvatar = e => {
-    console.log(111);
-    setFile(e.target.file);
+    setFile(e.target.files[0]);
+    setAlert("Resim hafızaya alındı. Kaydede basarak kaydedin.", "success");
   };
   const onAvatarSubmit = e => {
-    console.log(22211);
     e.preventDefault();
     const form = new FormData();
     console.log(file);
@@ -120,28 +121,19 @@ const Account = ({
           <div className="account-profile">
             <div className="row">
               <div className="col-md-3 col-sm-3">
-                <form onSubmit={e => onAvatarSubmit(e)}>
-                  <img
-                    alt=""
-                    className="image"
-                    src={avatar}
-                    style={{
-                      width: "150px",
-                      height: "150px",
-                      marginLeft: "auto",
-                      marginRight: "auto",
-                      borderRadius: "50%",
-                      display: "block"
-                    }}
-                  />
-                  <input
-                    type="file"
-                    name="file"
-                    id=""
-                    onChange={e => setAvatar(e)}
-                  />
-                  <button type="submit">Yukle</button>
-                </form>
+                <img
+                  alt=""
+                  className="image"
+                  src={avatar}
+                  style={{
+                    width: "150px",
+                    height: "150px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    borderRadius: "50%",
+                    display: "block"
+                  }}
+                />
               </div>
 
               <div className="col-md-9 col-sm-9">
@@ -313,12 +305,15 @@ const Account = ({
                     </div>
                   </section>
                 </form>
-                <section id="change-password">
-                  <header>
-                    <h2>Şifremi Değiştir</h2>
-                  </header>
-                  <div className="row">
+
+                <div className="row">
+                  <section id="change-password">
+                    <br />
                     <div className="col-md-6 col-sm-6">
+                      <header>
+                        <h2>Şifremi Değiştir</h2>
+                      </header>
+
                       <form id="form-account-password" method="post">
                         <div className="form-group">
                           <label htmlFor="form-account-password-current">
@@ -364,7 +359,41 @@ const Account = ({
                         </div>
                       </form>
                     </div>
+                    <br />
                     <div className="col-md-6 col-sm-6">
+                      <header>
+                        <h2>Profil Fotomu Değiştir</h2>
+                      </header>
+                      <form onSubmit={e => onAvatarSubmit(e)}>
+                        <input
+                          type="file"
+                          name="file"
+                          id="file"
+                          onChange={e => setAvatar(e)}
+                        />
+                        <label htmlFor="file" className="btn-3">
+                          <span>
+                            Resim Yükle{" "}
+                            <i
+                              className="fa fa-cloud-upload"
+                              aria-hidden="true"
+                            />
+                          </span>
+                        </label>
+                        <button
+                          type="submit"
+                          className="btn pull-right btn-default"
+                        >
+                          {" "}
+                          Kaydet
+                        </button>
+                      </form>{" "}
+                    </div>
+                    <br />
+                    <div className="col-md-6 col-sm-6">
+                      <header>
+                        <h2>Hesabımı Sil</h2>
+                      </header>
                       <strong>Dikkat:</strong>
                       <p>
                         Hesabı sile tıklarsanız; hesabınız, varsa hesaba bağlı
@@ -381,8 +410,8 @@ const Account = ({
                         </button>
                       </div>
                     </div>
-                  </div>
-                </section>
+                  </section>
+                </div>
               </div>
             </div>
           </div>
@@ -405,5 +434,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile, createProfile, deleteAccount, changeAvatar }
+  { getCurrentProfile, createProfile, deleteAccount, changeAvatar, setAlert }
 )(withRouter(Account));
