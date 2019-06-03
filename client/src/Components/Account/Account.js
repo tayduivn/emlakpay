@@ -58,7 +58,7 @@ const Account = ({
         twitter: loading || !profile.social ? "" : profile.social.twitter
       });
     }
-  }, [profile]);
+  }, [profile, loading]);
 
   const {
     name,

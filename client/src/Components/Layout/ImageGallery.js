@@ -9,7 +9,7 @@ const ImageGallery = ({ imgArray }) => {
       heightMode={"first"}
     >
       {imgArray.map(link => (
-        <img src={link} key={link} />
+        <img src={link ? link : ""} key={link} alt="" />
       ))}
     </Carousel>
   );

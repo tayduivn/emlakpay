@@ -76,9 +76,30 @@ const Contact = ({ setAlert, history }) => {
                 <hr />
                 <section id="social">
                   <div className="agent-social">
-                    <a href="#" className="fa fa-twitter btn btn-grey-dark" />
-                    <a href="#" className="fa fa-facebook btn btn-grey-dark" />
-                    <a href="#" className="fa fa-linkedin btn btn-grey-dark" />
+                    <a
+                      href="https://www.twitter.com/emlakpay"
+                      target="_blank"
+                      className="fa fa-twitter btn btn-grey-dark"
+                      rel="noopener noreferrer"
+                    >
+                      {""}
+                    </a>
+                    <a
+                      href="https://www.facebook.com/emlakpay"
+                      target="_blank"
+                      className="fa fa-facebook btn btn-grey-dark"
+                      rel="noopener noreferrer"
+                    >
+                      {""}
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/emlakpay"
+                      target="_blank"
+                      className="fa fa-linkedin btn btn-grey-dark"
+                      rel="noopener noreferrer"
+                    >
+                      {""}
+                    </a>
                   </div>
                 </section>
               </section>

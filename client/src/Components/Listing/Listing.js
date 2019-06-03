@@ -28,7 +28,6 @@ const Listing = ({
       brief,
       location,
       price,
-      listingDate,
       propertyType,
       propertyStatus,
       grossm2,
@@ -77,7 +76,7 @@ const Listing = ({
                   </figure>
                   <span className="actions">
                     <a
-                      href="#"
+                      href=""
                       className={
                         auth &&
                         auth.user &&

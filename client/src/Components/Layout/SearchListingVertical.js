@@ -1,7 +1,8 @@
-import React, { useState, Fragment } from "react";
+import React, { useState } from "react";
 import SimpleSelect from "./SimpleSelect";
 import { connect } from "react-redux";
 import LocationSelector from "./LocationSelector";
+import Guides from "./Guides";
 import { filterListings } from "../../actions/listing";
 import PropTypes from "prop-types";
 const SearchListingVertical = ({ filterListings }) => {
@@ -189,22 +190,7 @@ const SearchListingVertical = ({ filterListings }) => {
           </div>
         </form>
       </aside>
-
-      <aside id="our-guides">
-        <header>
-          <h3>Faydalı Bilgiler</h3>
-        </header>
-        <a href="#" className="universal-button">
-          <figure className="fa fa-home" />
-          <span>Nasıl Çalışır ?</span>
-          <span className="arrow fa fa-angle-right" />
-        </a>
-        <a href="#" className="universal-button">
-          <figure className="fa fa-umbrella" />
-          <span>S.S.S</span>
-          <span className="arrow fa fa-angle-right" />
-        </a>
-      </aside>
+      <Guides />
     </section>
   );
 };

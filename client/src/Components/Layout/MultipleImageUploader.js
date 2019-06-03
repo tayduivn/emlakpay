@@ -1,10 +1,9 @@
-import React, { useState, Component } from "react";
+import React from "react";
 import ImageUploader from "react-images-upload";
 
 const MultipleImageUploader = ({ setImages }) => {
   return (
     <ImageUploader
-      withIcon={true}
       buttonText="Resim Ekle"
       onChange={setImages}
       imgExtension={[".jpg", ".png"]}

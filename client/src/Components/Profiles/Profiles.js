@@ -6,7 +6,6 @@ import { getProfiles } from "../../actions/profile";
 import ProfileItem from "./ProfileItem";
 import { Link } from "react-router-dom";
 import Pagination from "../Layout/Pagination";
-import SearchAgentVertical from "../Layout/SearchAgentVertical";
 const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   useEffect(() => {
     getProfiles();

@@ -10,7 +10,9 @@ const SocialNetworks = ({ social: { linkedin, twitter, facebook } }) => {
             target="_blank"
             rel="noopener noreferrer"
             className="fa fa-twitter btn btn-grey-dark"
-          />
+          >
+            {""}
+          </a>
         )}
         {facebook && (
           <a
@@ -18,7 +20,9 @@ const SocialNetworks = ({ social: { linkedin, twitter, facebook } }) => {
             target="_blank"
             rel="noopener noreferrer"
             className="fa fa-facebook btn btn-grey-dark"
-          />
+          >
+            {""}
+          </a>
         )}
         {linkedin && (
           <a
@@ -26,7 +30,9 @@ const SocialNetworks = ({ social: { linkedin, twitter, facebook } }) => {
             target="_blank"
             rel="noopener noreferrer"
             className="fa fa-linkedin btn btn-grey-dark"
-          />
+          >
+            {""}
+          </a>
         )}
       </div>
     </div>
