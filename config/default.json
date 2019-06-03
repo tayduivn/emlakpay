@@ -1,7 +1,0 @@
-{
-  "mongoURI": "mongodb+srv://admin222:4CbRYMskRiFp0q1r@cluster0-yivkr.gcp.mongodb.net/test?retryWrites=true&w=majority",
-  "jwtSecret": "sec009retto9990ken",
-  "gc-project": "emlakpay",
-  "gc-storage": "emlakpay-user-uploads",
-  "gc-key": "./config/Emlakpay-3925bb773d09.json"
-}
