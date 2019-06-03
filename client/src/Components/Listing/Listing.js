@@ -192,11 +192,11 @@ const Listing = ({
                           <p>{profile.bio}</p>
                           <dl>
                             <dt>Telefon No:</dt>
-                            <dd>{profile.phoneNo}</dd>
+                            <dd>{profile.phoneNo ? profile.phoneNo : "-"}</dd>
                             <dt>Email:</dt>
-                            <dd>{profile.email}</dd>
+                            <dd>{profile.email ? profile.email : "-"}</dd>
                             <dt>Emlak Ofisi:</dt>
-                            <dd>{profile.company}</dd>
+                            <dd>{profile.company ? profile.company : "-"}</dd>
                           </dl>
                           <hr />
                           <Link
