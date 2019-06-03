@@ -5,6 +5,7 @@ import "./App.css";
 import Navigation from "./Components/Layout/Navigation";
 import Landing from "./Components/Layout/Landing";
 import Contact from "./Components/Layout/Contact";
+import NotFound from "./Components/Layout/NotFound";
 import Footer from "./Components/Layout/Footer";
 import Register from "./Components/Auth/Register";
 import Login from "./Components/Auth/Login";
@@ -53,6 +54,7 @@ const App = () => {
             <PrivateRoute exact path="/my-favs" component={MyFavs} />
             <PrivateRoute exact path="/listing/:id" component={Listing} />
             <PrivateRoute exact path="/new-listing" component={ListingForm} />
+            <Route component={NotFound} />
           </Switch>
           <Footer />
         </div>
