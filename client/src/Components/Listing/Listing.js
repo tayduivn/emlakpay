@@ -75,8 +75,7 @@ const Listing = ({
                     {location.province}
                   </figure>
                   <span className="actions">
-                    <a
-                      href=""
+                    <Link
                       className={
                         auth &&
                         auth.user &&
@@ -91,7 +90,7 @@ const Listing = ({
                     >
                       <span className="title-add">Favorilere Ekle</span>
                       <span className="title-added">Eklendi</span>
-                    </a>
+                    </Link>
                   </span>
                 </header>
 
