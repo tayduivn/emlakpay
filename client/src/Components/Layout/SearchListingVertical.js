@@ -1,10 +1,69 @@
-import React from "react";
+import React, { useState, Fragment } from "react";
 import SimpleSelect from "./SimpleSelect";
+import { connect } from "react-redux";
 import LocationSelector from "./LocationSelector";
-const SearchListingVertical = () => {
-  const setSelect = (e, name) => {
-    console.log(123);
+import { filterListings } from "../../actions/listing";
+import PropTypes from "prop-types";
+const SearchListingVertical = ({ filterListings }) => {
+  const [formData, setFormData] = useState({
+    district: "",
+    province: "",
+    neighborhood: "",
+    minPrice: 0,
+    maxPrice: 0,
+    propertyType: "",
+    propertyStatus: "",
+    minGrossm2: 0,
+    maxGrossm2: 0,
+    minRoomCount: 0,
+    maxRoomCount: 0,
+    minLoungeCount: 0,
+    maxLoungeCount: 0
+  });
+
+  const {
+    district,
+    province,
+    neighborhood,
+    minPrice,
+    maxPrice,
+    propertyType,
+    propertyStatus,
+    minGrossm2,
+    maxGrossm2,
+    minRoomCount,
+    maxRoomCount,
+    minLoungeCount,
+    maxLoungeCount
+  } = formData;
+  const onChange = e => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  const setSelect = (e, name) => {
+    setFormData({ ...formData, [name]: e.value });
+  };
+  const onSubmit = e => {
+    e.preventDefault();
+    const query = {};
+    district !== "" && (query.district = district);
+    province !== "" && (query.province = province);
+    neighborhood !== "" && (query.neighborhood = neighborhood);
+    propertyType !== "" && (query.propertyType = propertyType);
+    propertyStatus !== "" && (query.propertyStatus = propertyStatus);
+    minPrice !== 0 && (query.price = { $gte: minPrice });
+    maxPrice !== 0 && (query.price = { $gte: minPrice, $lte: maxPrice });
+    minGrossm2 !== 0 && (query.price = { $gte: minGrossm2 });
+    maxGrossm2 !== 0 && (query.price = { $gte: minGrossm2, $lte: maxGrossm2 });
+    minRoomCount !== 0 && (query.price = { $gte: minRoomCount });
+    maxRoomCount !== 0 &&
+      (query.price = { $gte: minRoomCount, $lte: maxRoomCount });
+    minLoungeCount !== 0 && (query.price = { $gte: minLoungeCount });
+    maxLoungeCount !== 0 &&
+      (query.price = { $gte: minLoungeCount, $lte: maxLoungeCount });
+    filterListings(query);
+  };
+
   return (
     <section id="sidebar">
       <aside id="edit-search">
@@ -12,14 +71,16 @@ const SearchListingVertical = () => {
           <h3>İlan Ara</h3>
         </header>
         <form
-          role="form"
           id="form-sidebar"
           className="form-search"
-          action="properties-listing.html"
+          onSubmit={e => {
+            onSubmit(e);
+          }}
         >
           <div className="form-group">
             <SimpleSelect
               placeholder="İlan Tipi"
+              name="propertyStatus"
               options={[
                 { value: "Satılık", label: "Satılık" },
                 { value: "Kiralık", label: "Kiralık" }
@@ -30,6 +91,7 @@ const SearchListingVertical = () => {
           <div className="form-group">
             <SimpleSelect
               placeholder="Emlak Tipi"
+              name="propertyType"
               options={[
                 { value: "Konut", label: "Konut" },
                 { value: "İşyeri", label: "İşyeri" },
@@ -50,14 +112,16 @@ const SearchListingVertical = () => {
               <input
                 placeholder="Fiyat (min)"
                 type="number"
-                name="price-min"
+                name="minPrice"
                 style={{ width: "48%", marginRight: "4%" }}
+                onChange={e => onChange(e)}
               />
               <input
                 placeholder="Fiyat (max)"
                 type="number"
-                name="price-max"
+                name="maxPrice"
                 style={{ width: "48%" }}
+                onChange={e => onChange(e)}
               />
             </div>
           </div>
@@ -66,14 +130,16 @@ const SearchListingVertical = () => {
               <input
                 placeholder="Brüt m2 (min)"
                 type="number"
-                name="m2-min"
+                name="minGrossm2"
                 style={{ width: "48%", marginRight: "4%" }}
+                onChange={e => onChange(e)}
               />
               <input
                 placeholder="Brüt m2 (max)"
                 type="number"
-                name="m2-max"
+                name="maxGrossm2"
                 style={{ width: "48%" }}
+                onChange={e => onChange(e)}
               />
             </div>
           </div>
@@ -82,14 +148,16 @@ const SearchListingVertical = () => {
               <input
                 placeholder="Oda (min)"
                 type="number"
-                name="m2-min"
+                name="minRoomCount"
                 style={{ width: "48%", marginRight: "4%" }}
+                onChange={e => onChange(e)}
               />
               <input
                 placeholder="Oda (max)"
                 type="number"
-                name="m2-max"
+                name="maxRoomCount"
                 style={{ width: "48%" }}
+                onChange={e => onChange(e)}
               />
             </div>
           </div>
@@ -98,14 +166,16 @@ const SearchListingVertical = () => {
               <input
                 placeholder="Salon (min)"
                 type="number"
-                name="m2-min"
+                name="minLoungeCount"
                 style={{ width: "48%", marginRight: "4%" }}
+                onChange={e => onChange(e)}
               />
               <input
                 placeholder="Salon (max)"
                 type="number"
-                name="m2-max"
+                name="maxLoungeCount"
                 style={{ width: "48%" }}
+                onChange={e => onChange(e)}
               />
             </div>
           </div>
@@ -122,7 +192,7 @@ const SearchListingVertical = () => {
 
       <aside id="our-guides">
         <header>
-          <h3>Our Guides</h3>
+          <h3>Faydalı Bilgiler</h3>
         </header>
         <a href="#" className="universal-button">
           <figure className="fa fa-home" />
@@ -138,5 +208,11 @@ const SearchListingVertical = () => {
     </section>
   );
 };
+SearchListingVertical.propTypes = {
+  filterListings: PropTypes.func.isRequired
+};
 
-export default SearchListingVertical;
+export default connect(
+  null,
+  { filterListings }
+)(SearchListingVertical);

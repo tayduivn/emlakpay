@@ -8,7 +8,7 @@ const ProfileItem = ({
     <div className="col-md-12 col-lg-12">
       <div className="agent">
         <Link to={`/profile/${user._id}`} className="agent-image">
-          <img alt="" src="assets/img/agent-01.jpg" />
+          <img alt="" src={avatar} />
         </Link>
         <div className="wrapper">
           <header>
