@@ -9,7 +9,7 @@ const multerGCS = require("multer-google-storage");
 const config = require("config");
 
 const GOOGLE_CLOUD_PROJECT_ID = config.get("gc-project");
-const GOOGLE_CLOUD_KEYFILE = "./config/Emlakpay-b544e179f709.json";
+const GOOGLE_CLOUD_KEYFILE = config.get("gc-key");
 const BUCKET_NAME = config.get("gc-storage");
 
 let uploadHandler = multer({

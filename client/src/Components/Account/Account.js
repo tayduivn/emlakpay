@@ -88,7 +88,6 @@ const Account = ({
   const onAvatarSubmit = e => {
     e.preventDefault();
     const form = new FormData();
-    console.log(file);
     if (file) {
       form.append("file", file);
     }
