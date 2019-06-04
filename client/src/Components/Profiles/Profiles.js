@@ -37,7 +37,9 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
                     </div>
                   ))
                 ) : (
-                  <h4> No Profiles </h4>
+                  <div className="col-sm-12 col-md-6">
+                    <h4> Profil Bulunamadı </h4>
+                  </div>
                 )}
               </div>
             </section>
