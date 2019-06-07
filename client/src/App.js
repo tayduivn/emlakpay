@@ -10,6 +10,7 @@ import Footer from "./Components/Layout/Footer";
 import Register from "./Components/Auth/Register";
 import Login from "./Components/Auth/Login";
 import Logout from "./Components/Auth/Logout";
+import Pricing from "./Components/Layout/Pricing";
 import Account from "./Components/Account/Account";
 import Me from "./Components/Profile/Me";
 import Profiles from "./Components/Profiles/Profiles";
@@ -54,6 +55,7 @@ const App = () => {
             <PrivateRoute exact path="/my-favs" component={MyFavs} />
             <PrivateRoute exact path="/listing/:id" component={Listing} />
             <PrivateRoute exact path="/new-listing" component={ListingForm} />
+            <PrivateRoute exact path="/pricing" component={Pricing} />
             <Route component={NotFound} />
           </Switch>
           <Footer />

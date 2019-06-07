@@ -49,6 +49,9 @@ const Navigation = ({ auth: { isAuthenticated, loading }, logout }) => {
           </li>
         </ul>
       </li>
+      <li>
+        <Link to="/pricing">Fiyatlandırma</Link>
+      </li>
 
       <li>
         <Link to="/contact">İletişim</Link>
